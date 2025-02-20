@@ -3,5 +3,12 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/.sfdx": true
-  }
+  },
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.autoStash": true,
+  "git.autoRepositoryDetection": true,
+  "git.confirmSync": false,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
 }
