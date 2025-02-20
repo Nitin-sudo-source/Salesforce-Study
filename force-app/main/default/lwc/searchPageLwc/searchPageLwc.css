@@ -1,0 +1,155 @@
+@import "./styles.css";
+
+.container{
+    background-color:  #cae2df ; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  
+  .Table1Css {
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+   
+  
+  }
+  .Table1Css th {
+    border: 0.5px solid #0e0d0d;
+    padding: 6px;
+    text-align: left;
+    /* background-color:  #cae2df ; */
+    font-weight: bold;
+    color:#0e0e0e;
+    text-shadow: 2px 2px 3px rgb(128, 125, 125);
+    width: 20%;
+  }
+  
+  .Table1Css td {
+    border: 0.5px solid #0e0e0e;
+    padding: 4px;
+    text-align: left;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px rgb(176, 175, 175);
+    width:30%;
+  }
+
+  .my {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    background: #1C4E80;
+    color: whitesmoke;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  .card {
+    --bg: #e8e8e8;
+    --contrast: #e2e0e0;
+    --grey: #93a1a1;
+    position: relative;
+    padding: 9px;
+    background-color: var(--bg);
+    border-radius: 35px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-conic-gradient(var(--bg) 0.0000001%, var(--grey) 0.000104%) 60% 60%/600% 600%;
+    filter: opacity(10%) contrast(105%);
+  }
+  
+  .card-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 190px;
+    height: 254px;
+    background-color: var(--contrast);
+    border-radius: 30px;
+    /* Content style */
+    font-size: 30px;
+    font-weight: 900;
+    color: #c7c4c4;
+    text-align: center;
+    font-family: monospace;
+  }
+
+  @font-face {
+    font-family: 'GreatVibes-Regular'; 
+    src: url('../../resource/signature/GreatVibes-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.user-input-box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.user-input-box label{
+  width: 95%;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 5px;
+}
+
+.user-input-box lightning-input,lightning-slider,lightning-input-field {
+  width: 95%;
+  border-radius: 7px;
+}
+
+lightning-combobox{
+  width: 95%;
+  border-radius: 7px;
+}
+
+.form-title{
+  font-size: 26px;
+  font-weight: 600px;
+  text-align: center;
+  padding-bottom: 6px;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  border-bottom: 1px solid white;
+}
+
+.btn{
+  display: block;
+  width: 70%;
+  margin-top: 20px;
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  color: rgb(209, 209, 209);
+  background: #9b9050;
+}
+
+.container{
+  width: 100%;
+  max-width: 750px;
+  /* background: #2f2f2f; */
+  background: silver;
+  padding: 28px;
+  margin: 0px 28px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px grey;
+}

@@ -1,0 +1,19 @@
+<apex:page showHeader="false" standardStylesheets="false"
+    standardController="Account">
+    
+    <!-- 
+    This page must be called with an Account ID in the request, e.g.:
+    https://<salesforceInstance>/apex/ReportAccountSimple?id=001D000000JRBet
+    -->
+
+    <h1>Account Summary for {! Account.Name }</h1>
+    
+    <table>
+        <tr><th>Phone</th>  <td><apex:outputText value="{! Account.Phone }"/></td></tr>
+        <tr><th>Fax</th>    <td><apex:outputText value="{! Account.Fax }"/></td></tr>
+        <tr><th>Website</th><td><apex:outputText value="{! Account.Website }"/></td></tr>
+    </table>
+
+    <p><apex:outputText value="{! Account.Description }"/></p>
+        
+</apex:page>

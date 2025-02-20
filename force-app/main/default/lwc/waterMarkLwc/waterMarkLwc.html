@@ -1,0 +1,24 @@
+<template>
+    <!--<lightning-card  variant="Narrow"  title="Get Current User Info in LWC" icon-name="standard:user">
+        <div class="slds-box slds-m-around_medium">
+            </div>
+    </lightning-card>-->
+            <!-- <div class="watermark" >
+                    <p> {userData} &nbsp; </p>
+                </div>    -->
+                <lightning-card title="Rendering If else setting " icon-name="custom:custom63">
+                        <div>
+                <!---Replace if:true with lwc:if-->
+    <template if:true={isTemplateOne}> 
+        This is template one.
+    </template>
+    <!-- Replace if:false with lwc:else -->
+    <template if:false={isTemplateOne}> 
+        This is template two.
+    </template>
+                <lightning-button variant="brand" label="Check" title="Save" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                  <!-- variant available (Neutral (Default), Base, Brand, Brand Outline, Destructive, Destructive Text, Success, inverse) -->  
+                
+            </div>
+                </lightning-card>
+</template>

@@ -1,0 +1,246 @@
+<!-- <template>
+    <lightning-card title="Selected Rows Persistent Pagination LWC Datatable" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+            <div>
+                <lightning-datatable data-id="datatable" key-field="Id" 
+                hide-checkbox-column={hideCheckboxColumn}
+                show-row-number-column
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={handleSort}
+                load-more-offset={loadMoreOffset}
+                is-loading={isLoading}
+                onfetchmore={handleFetchMore}
+                class="custom-datatable"
+                data={data} columns={columns} selected-rows={selectedRows}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </div>
+        </div>
+
+        <div class="slds-align_absolute-center">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}
+                disabled={isPreviousDisable}>
+            </lightning-button>
+
+            <span class="slds-badge slds-badge_lightest"
+                        style="margin-right: 10px;margin-left: 10px;">
+                       Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records.
+                     Page {page} of {totalPage}.
+            </span>
+
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}
+                disabled={isNextDisable}>
+            </lightning-button>
+        </div>
+        
+    </lightning-card>
+</template> -->
+
+
+<template>
+    <template if:true={showSpinner}>
+      <div id="spinnerDiv" style="height: 10rem">
+        <div class="slds-spinner_container">
+          <div role="status" class="slds-spinner slds-spinner_medium">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <!-- A lightning-card component to display the content -->
+    <lightning-card>
+      <!-- A table to display the accounts data -->
+      <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <!-- The header of the table -->
+        <thead>
+          <!-- A row to contain the header cells -->
+          <tr class="slds-line-height_reset">
+            <!-- A header cell for the 'Name' column -->
+            <th
+              data-field-name="Name"
+              class="slds-text-title_caps"
+              scope="col"
+              onclick={handleSort}
+            >
+              Name
+              <span data-field-id="Name" lwc:dom="manual"></span>
+            </th>
+            <!-- A header cell for the 'Phone' column -->
+            <th
+              data-field-name="Phone"
+              class="slds-text-title_caps"
+              scope="col"
+              onclick={handleSort}
+            >
+              Phone
+              <span data-field-id="Phone" lwc:dom="manual"></span>
+            </th>
+            <!-- A header cell for the 'Industry' column -->
+            <th
+              data-field-name="Industry"
+              class="slds-text-title_caps"
+              scope="col"
+              onclick={handleSort}
+            >
+              Industry
+              <span data-field-id="Industry" lwc:dom="manual"></span>
+            </th>
+            <!-- A header cell for the 'CreatedDate' column -->
+            <th
+              data-field-name="CreatedDate"
+              class="slds-text-title_caps"
+              scope="col"
+              onclick={handleSort}
+            >
+              CreatedDate
+              <span data-field-id="CreatedDate" lwc:dom="manual"></span>
+            </th>
+            <!-- A header cell for the 'LastModifiedDate' column -->
+            <th
+              data-field-name="LastModifiedDate"
+              class="slds-text-title_caps"
+              scope="col"
+              onclick={handleSort}
+            >
+              LastModifiedDate
+              <span data-field-id="LastModifiedDate" lwc:dom="manual"></span>
+            </th>
+          </tr>
+        </thead>
+        <!-- The body of the table -->
+        <tbody>
+          <!-- A conditional template to display the accounts data if there are any -->
+          <template if:true={accounts.length}>
+            <!-- A for:each template to iterate through the displayAccounts array -->
+            <template for:each={displayAccounts} for:item="account">
+              <!-- A row to display a single account data -->
+              <tr key={account.Id}>
+                <!-- A cell for the 'Name' column -->
+                <td>{account.Name}</td>
+                <!-- A cell for the 'Phone' column -->
+                <td>
+                  <!-- A lightning-formatted-phone component to format the phone number -->
+                  <lightning-formatted-phone
+                    value={account.Phone}
+                  ></lightning-formatted-phone>
+                </td>
+                <!-- A cell for the 'Industry' column -->
+                <td>{account.Industry}</td>
+                <!-- A cell for the 'CreatedDate' column -->
+                <td>
+                  <!-- A lightning-formatted-date-time component to format the date and time -->
+                  <lightning-formatted-date-time
+                    value={account.CreatedDate}
+                    year="numeric"
+                    month="numeric"
+                    day="numeric"
+                    hour="2-digit"
+                    minute="2-digit"
+                  >
+                  </lightning-formatted-date-time>
+                </td>
+                <!-- A cell for the 'LastModifiedDate' column -->
+                <td>
+                  <!-- A lightning-formatted-date-time component to format the date and time -->
+                  <lightning-formatted-date-time
+                    value={account.LastModifiedDate}
+                    year="numeric"
+                    month="numeric"
+                    day="numeric"
+                    hour="2-digit"
+                    minute="2-digit"
+                  >
+                  </lightning-formatted-date-time>
+                </td>
+              </tr>
+            </template>
+          </template>
+          <!-- A conditional template to display a message if there are no accounts data -->
+          <template if:false={accounts.length}>
+            <tr>
+              <td colspan="5">No data to display</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <!-- A lightning-layout component to organize the content into multiple rows -->
+      <lightning-layout multiple-rows="true">
+        <!-- A lightning-layout-item component to specify the size of the content -->
+        <lightning-layout-item size="12">
+          <!-- A div with slds-align_absolute-center class to align the content to the center -->
+          <div class="slds-align_absolute-center">
+            <!-- A ul with slds-button-group-row class to display the buttons in a row -->
+            <ul class="slds-button-group-row">
+              <!-- A li with slds-button-group-item class to display the first button in the group -->
+              <li class="slds-button-group-item">
+                <!-- A lightning-button component to represent the first page button -->
+                <lightning-button
+                  label="First"
+                  onclick={navigateToFirstPage}
+                  disabled={isFirstPage}
+                >
+                </lightning-button>
+              </li>
+              <!-- A li with slds-button-group-item class to display the previous button in the group -->
+              <li class="slds-button-group-item">
+                <!-- A lightning-button component to represent the previous page button -->
+                <lightning-button
+                  label="Previous"
+                  onclick={navigateToPreviousPage}
+                  disabled={isPreviousDisabled}
+                >
+                </lightning-button>
+              </li>
+              <template lwc:if={showPageButtons}>
+                <!-- A template with if:true condition to check if the pageNumbers array has length -->
+                <template if:true={pageNumbers.length}>
+                  <!-- A template with for:each loop to iterate through the pageNumbers array -->
+                  <template for:each={pageNumbers} for:item="pageNumber">
+                    <!-- A li with slds-button-group-item class to display each page number button in the group -->
+                    <li class="slds-button-group-item" key={pageNumber}>
+                      <!-- A button with data-id attribute and slds-button_neutral class to represent each page number -->
+                      <button
+                        data-id={pageNumber}
+                        class="slds-button slds-button_neutral"
+                        onclick={navigateToPage}
+                      >
+                        {pageNumber}
+                      </button>
+                    </li>
+                  </template>
+                </template>
+              </template>
+              <template lwc:else>
+                <li class="slds-button-group-item" style="padding: 5px">
+                  Showing Page {currentPage} of {totalPages}
+                </li>
+              </template>
+              <!-- A li with slds-button-group-item class to display the next button in the group -->
+              <li class="slds-button-group-item">
+                <!-- A lightning-button component to represent the next page button -->
+                <lightning-button
+                  label="Next"
+                  onclick={navigateToNextPage}
+                  disabled={isNextDisabled}
+                >
+                </lightning-button>
+              </li>
+              <!-- A li with slds-button-group-item class to display the last button in the group -->
+              <li class="slds-button-group-item">
+                <!-- A lightning-button component to represent the last page button -->
+                <lightning-button
+                  label="Last"
+                  onclick={navigateToLastPage}
+                  disabled={isLastPage}
+                >
+                </lightning-button>
+              </li>
+            </ul>
+          </div>
+        </lightning-layout-item>
+      </lightning-layout>
+    </lightning-card>
+  </template>

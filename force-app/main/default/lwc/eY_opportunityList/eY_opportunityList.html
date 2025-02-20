@@ -1,0 +1,47 @@
+<template>
+    <lightning-card title="Opportunities" icon-name="standard:opportunity">
+
+          <template if:true={showData}>
+        <lightning-combobox 
+            label="Stage Filter"
+            value={stageKey}
+            options={stageOptions}
+            onchange={handleStageChange}>
+        </lightning-combobox>
+
+        <lightning-input 
+            type="date" 
+            label="Start Date" 
+            value={startDate} 
+            onchange={handleStartDateChange}>
+        </lightning-input>
+
+        <lightning-input 
+            type="date" 
+            label="End Date" 
+            value={endDate} 
+            onchange={handleEndDateChange}>
+        </lightning-input>
+
+        <lightning-button 
+            label="Clear Filters" 
+            onclick={handleClearFilters}>
+        </lightning-button>
+
+        <lightning-datatable
+            data={opportunities}
+            columns={columns}
+            key-field="Id"
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onsort={handleSort}>
+        </lightning-datatable>
+          </template>
+
+        <!-- <c-pagination 
+            page-number={pageNumber}
+            onprevious={handlePrevious}
+            onnext={handleNext}>
+        </c-pagination> -->
+    </lightning-card>
+</template>

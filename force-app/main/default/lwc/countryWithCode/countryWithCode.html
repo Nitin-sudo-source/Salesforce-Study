@@ -1,0 +1,35 @@
+<template>
+    <div class="country-phone-picker">
+        <div class="phone-number-container">
+            <!-- Dropdown to select country -->
+            <button class="country-select-button" onclick={toggleDropdown}>
+                <img src={selectedCountry.flag} alt={selectedCountry.name} class="country-flag" />
+                <span class="country-dial-code">{selectedCountry.dialCode}</span>
+            </button>
+            <!-- Input for phone number -->
+            <input type="tel" class="phone-input" placeholder="Enter phone number" value={phoneNumber} oninput={handlePhoneNumberChange} />
+            <!-- Clear input button -->
+            <lightning-icon class="clear-button" icon-name='action:reject' alternative-text='reject' size='large' title='reject'></lightning-icon>
+                        <button class="clear-button" onclick={clearPhoneNumber}> X </button>
+
+        </div>
+
+        <!-- Dropdown list of countries -->
+        <div class="dropdown" if:true={isDropdownOpen}>
+            <!-- Search box -->
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search for country" oninput={handleSearchInputChange} />
+            </div>
+            <!-- List of countries -->
+            <ul class="country-list">
+                <template for:each={filteredCountries} for:item="country">
+                    <li key={country.code} class="country-item" data-id={country.code} onclick={selectCountry}>
+                        <img src={country.flag} alt={country.name} class="country-flag" />
+                        <span class="country-name">{country.name}</span>
+                        <span class="country-dial-code">{country.dialCode}</span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</template>

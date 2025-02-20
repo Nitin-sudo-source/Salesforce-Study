@@ -1,0 +1,42 @@
+<template>
+    <lightning-card>
+        <div style="padding:10px;">
+
+        <p style="font-size:22px; color:red; text-align:center !important;"> My First Component</p>
+        <lightning-record-edit-form
+          object-api-name="Account">
+          <table>
+            <tr>
+                <th>Account: </th>
+                <td><lightning-input-field  field-name="Name" variant="label-hidden" onchange={handlechangeName}>
+
+                </lightning-input-field></td>
+            </tr>
+            <tr>
+                <th>Phone: </th>
+                <td><lightning-input-field  field-name="Phone" variant="standard" onchange={handlechangePhone}>
+
+                </lightning-input-field></td>
+            </tr>
+            <tr>
+                <th>Email: </th>
+                <td><lightning-input-field  field-name="PersonEmail" variant="standard" onchange={handlechange}>
+
+                </lightning-input-field></td>
+            </tr>
+          </table><br/>
+          <p style="text-align:center !important;">
+            <lightning-button 
+              variant="success"
+              label="Save" 
+              onclick={handleSave} 
+            ></lightning-button>
+          </p>
+         
+        </lightning-record-edit-form>
+    </div>
+    <template if:true={showResult}>
+        <p> Success Thankyou !!</p>
+    </template>
+    </lightning-card>
+</template>

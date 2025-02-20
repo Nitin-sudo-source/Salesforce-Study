@@ -1,0 +1,42 @@
+<template>
+    <div style="margin:8px ; padding:15px ;border:2px solid black">
+    <center><h1 class="form-title">Upload Drawing</h1></center><br/>
+    <lightning-record-edit-form object-api-name="Drawing_Document__c" record-id={recordId} >
+    <table  class="slds-table  slds-no-row-hover slds-table_cell-buffer">
+        <tbody>
+            <tr>
+                <th class="th" style="color: black">Name</th>
+                <th class="th" style="color: black">Document Type</th>
+                <th class="th" style="color: black">Attachment</th>               
+            </tr>
+            <template for:each={listOfDocuments} for:item="rec" for:index="index">
+                <tr key={rec} class="slds-hint-parent">
+                <td style="border: 1px solid black;" ><lightning-input-field data-index={index}  data-id={rec.index}  name="Name"  field-name="Name" variant="label-hidden" value={rec.Name} onchange={handleInputChange}></lightning-input-field></td>
+                <td style="border: 1px solid black;"><lightning-input-field  data-index={index} data-id={rec.index}  name="Document_Type__c"  field-name="Document_Type__c" variant="label-hidden" value={rec.Document_Type__c}  onclick={createDocuments} onchange={handleInputChange}></lightning-input-field></td>
+                <td style="border: 1px solid black;padding-bottom:15px">
+                <lightning-input  name="fileUploader"  data-id={rec.index}  data-index={index} onchange={handleChange} type="file" value={rec.fileUploader}  accept=".jpg, .csv, .png, .doc, .pdf">  </lightning-input>
+                <p if:true={rec.fileName}>{rec.fileName}</p>
+                </td>
+                <td> <div class="slds-p-top_medium btns" style="margin-top: 0px !important;padding-bottom:20px">
+            <lightning-icon icon-name="action:new"
+                style="background-color: green !important; color: white !important;margin:0px 0px 5px 5px !important;cursor: pointer;"
+                alternative-text="Add Row" size="small" title="Add Row" access-key={rec.index}
+               onclick={addNewRow}> 
+            </lightning-icon>
+            <lightning-icon icon-name="action:delete"
+                style="background-color: red !important; color: white !important;margin:0px 5px 0px 5px !important;cursor: pointer;"
+                alternative-text="Delete Row" size="small" title="Delete Row" onclick={removeRow} access-key={rec.index}
+                >
+            </lightning-icon>
+             </div></td>
+            </tr>
+            </template>
+        </tbody>
+    </table>
+<div class="button-container">
+  <lightning-button class="save-button" variant="success" label="Save" icon-name="utility:breadcrumbs" onclick={createDocuments}></lightning-button>
+  <lightning-button class="cancel-button" variant="brand" label="Cancel" icon-name="utility:breadcrumbs" onclick={cancelbutton}></lightning-button>
+</div>
+</lightning-record-edit-form>
+</div>
+</template>

@@ -1,0 +1,17 @@
+<template>
+
+                <lightning-card title="Techdicer LWC Datatable CSS Styling" icon-name="standard:recipe">
+                    <div class="slds-scrollable" style="height:100rem;width:50rem">
+
+                    <template if:true={tableData}>
+                        <div class="tableCss">
+                            <lightning-datatable
+                                                key-field="Id"
+                                                data={tableData}
+                                                columns={columns}
+                            ></lightning-datatable>
+                        </div>
+                    </template>
+                    </div>
+                </lightning-card>    
+</template>

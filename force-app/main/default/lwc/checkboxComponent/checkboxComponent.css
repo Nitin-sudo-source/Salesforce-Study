@@ -1,0 +1,65 @@
+.alert {
+  padding: 32px;
+  padding-left: 0;
+  border-radius: 4px;
+  box-shadow: var(--shadow-2);
+  position: relative;
+  overflow: hidden;
+}
+.alert::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+.alert.alert-dismissible {
+  padding: 12px 48px 12px 0;
+}
+.alert.alert-dismissible .alert-icon {
+  padding: 0px 12px 0 36px;
+  line-height: 1;
+}
+.alert.alert-dismissible .alert-message h5 {
+  margin-bottom: 0px;
+}
+.alert.alert-dismissible .btn-close {
+  background: none;
+  padding: 1rem;
+}
+.alert.alert-dismissible .btn-close:focus-within, .alert.alert-dismissible .btn-close:focus {
+  box-shadow: none;
+}
+.alert.alert-dismissible .btn-close.dark i {
+  color: var(--black);
+}
+.alert.alert-dismissible .btn-close i {
+  color: var(--white);
+  font-weight: 700;
+}
+.alert .alert-icon {
+  padding: 32px;
+}
+.alert .alert-icon i {
+  font-size: 20px;
+  font-weight: 700;
+}
+.alert .alert-message h5 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.alert .alert-message p {
+  color: var(--black);
+  opacity: 0.88;
+}
+.alert.alert-info-light {
+  background: var(--info-light);
+}
+.alert.alert-info-light::before {
+  background: var(--info);
+}
+.alert.alert-info-light .alert-icon {
+  color: var(--info);
+}

@@ -1,0 +1,59 @@
+<apex:page controller="Ex_Attchmentupload" sidebar="false" standardStylesheets="true" lightningStylesheets="true" doctype="html-5.0" cache="false" showHeader="false">
+    <apex:form >
+        <apex:pageMessages />
+        <script>
+            function saveConfirm() {
+                var attachments = document.querySelectorAll("[id$='hlabel'] input[type='file']");
+                var hasAttachments = false;
+                for (var i = 0; i < attachments.length; i++) {
+                    if (attachments[i].value !== "") {
+                        hasAttachments = true;
+                        break;
+                    }
+                }
+                if (hasAttachments) {
+                    var check = confirm("Click 'Ok' to Confirm & Save changes");
+                    if (check) {
+                        actionToSaveRecords(check);
+                    } else {
+                        console.log('NO Save Proceeded');
+                    }
+                } else {
+                    alert("Please upload at least one document.");
+                }
+            }
+        </script>
+       
+        <div id="section" class="nav-item" style="font-weight:bold;font-size: 30px;">
+            <center>  <b>Upload Attachment</b></center>
+        </div>
+
+        <div id="section1">
+            <apex:pageblock id="out1">
+                <apex:variable var="rowNum" value="{!0}"/>
+                <apex:pageblockTable id="hlabel" value="{!attachcList}" var="a">
+                    <apex:column headerValue="Add Document" style="text-align:center;">
+                        <center>
+                            <apex:inputfile value="{!a.body}" filename="{!a.Name}" style="font-weight:bold;font-size: 20px;"/>
+                        </center>
+                    </apex:column>
+                </apex:pageblockTable>
+                <apex:actionRegion >
+                    <apex:commandButton id="cmdAdd" value="+" action="{!addRows}" reRender="out1" status="status">
+                        <apex:param name="rowIndex" value="{!rowNum}" />
+                    </apex:commandButton>
+                    <apex:commandButton id="cmdRmv" value="-" action="{!rmvRows}" reRender="out1" rendered="{!attachcList.size > 1}">
+                        <apex:param name="rowIndex" value="{!rowNum}" />
+                    </apex:commandButton>
+                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                </apex:actionRegion>
+                <br/><br/>
+                <p class="button">
+                    <center>
+                        <apex:commandbutton value="Save" action="{!save}" style="font-weight:bold;font-size: 15px;"/>
+                    </center>
+                </p>
+            </apex:pageblock>
+        </div>
+    </apex:form>
+</apex:page>

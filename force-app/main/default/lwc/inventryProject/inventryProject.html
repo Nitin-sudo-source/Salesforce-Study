@@ -1,0 +1,42 @@
+<template>
+    
+    <div class="maindiv">
+    <div class="slds-m-around_medium">
+        <lightning-combobox label="Select Project" value={projectId} options={projectOptions}
+            onchange={handleProjectChange}>
+        </lightning-combobox>
+    </div>
+    <!--<template if:true={projectOptions}>
+        <canvas class="confettiCanvas" id="canvas" lwc:dom="manual"></canvas>
+    </template>-->
+    <div class="slds-m-around_medium">
+        <lightning-combobox label="Select Tower" value={towerId} options={towerOptions} onchange={handleTowerChange}>
+        </lightning-combobox>
+    </div>
+        <div>
+            <table>
+                <tbody>
+                    <template for:each={unitMap} for:item="key">
+                            <tr key={key.Name}>
+                                    <td>
+                                        <div class="container">
+                                            Floor - {key.key}  <br>
+                                        </div>
+                                    </td>
+                                <template for:each={key.value} for:item="mapVal">
+                                     <td key={mapVal} >
+                                        <div class=" units">
+                                            <button style="border:none;" class="glow-button"
+                                                onclick={handleClick} value={mapVal.Id} data-unitstatus={mapVal.Unit_Status__c}>
+                                            {mapVal.Name} / {mapVal.Unit_Status__c} </br>{mapVal.Configuration__c}
+                                    </button>
+                                        </div>                  
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>  
+        </div>        
+</template>

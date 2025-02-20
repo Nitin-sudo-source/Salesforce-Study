@@ -1,0 +1,17 @@
+<template>
+    
+<lightning-card  title="My Card">
+    <template if:true={contacts.data}>
+        <lightning-datatable
+                key-field=id
+                data={contacts.data}
+                columns={columns}
+                onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </template>
+    <template if:false={errors}>
+        <p>{errors}</p>
+    </template>
+</lightning-card>
+
+</template>

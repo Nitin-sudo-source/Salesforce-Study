@@ -1,0 +1,93 @@
+<template>
+	<lightning-card title="Select All Example" icon-name="custom:custom14">
+		<div class="slds-m-around_medium" style="text-align:right;">
+			<p>Page: {currentPage}</p>
+			<p>Selected records on Page {currentPage} - {selectedCount}</p>
+		</div>
+		<!-- <div class="slds-m-around_large">
+             <lightning-button label="Previous" onclick={previousPage} disabled={isPreviousDisabled}></lightning-button>&nbsp;
+            <lightning-button label="Next" onclick={nextPage} disabled={isNextDisabled}></lightning-button>&nbsp;
+            <lightning-button label="Select All" onclick={selectAll}></lightning-button>&nbsp;
+            <lightning-button label="Unselect All" onclick={unselectAll}></lightning-button>
+        </div> -->
+		<template if:true={currentData.length}>
+			<div style="padding:10px;">
+				<table style="padding:10px;border:1px solid black !important;">
+					<tr>
+						<th style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+							S.No
+						</th>
+
+						<th style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+							<lightning-button label="Select All" onclick={selectAll}></lightning-button>&nbsp;
+							<lightning-button label="Unselect All" onclick={unselectAll}></lightning-button>
+						</th>
+						<td style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+							<lightning-button label="Previous" onclick={previousPage} disabled={isPreviousDisabled}>
+							</lightning-button>&nbsp;
+							<lightning-button label="Next" onclick={nextPage} disabled={isNextDisabled}>
+							</lightning-button>
+						</td>
+					</tr>
+					<template for:each={currentData} for:item="item">
+						<tr key={item.id}>
+							<th
+								style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+								{item.id}
+							</th>
+							<th
+								style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+								<lightning-input type="checkbox" data-id={item.id} checked={item.selected}
+									onchange={handleCheckboxChange}></lightning-input>
+							</th>
+
+							<td
+								style="border: 0.5px solid black; text-align:center; width:10%; padding:10px !important;">
+								<template if:true={item.selected}>
+									<lightning-input type="text" data-id={item.id} value={item.name}
+										onchange={handleInputChange}></lightning-input>
+								</template>
+								<template if:false={item.selected}>
+									{item.name}
+								</template>
+
+							</td>
+
+							<!-- <template if:false={item.selected}>
+                                <td>
+                                </td>
+                            </template> -->
+						</tr>
+					</template>
+				</table>
+				<div style="margin-top: 20px;">
+					<lightning-button label="Update All" onclick={updateAll}></lightning-button>
+				</div>
+				<!-- <template for:each={currentData} for:item="item">
+                    <li key={item.id} style="text-align:center;">
+                        <lightning-input type="checkbox" data-id={item.id} checked={item.selected} onchange={handleCheckboxChange}></lightning-input>
+                        {item.name}
+                    </li>
+                </template> -->
+			</div>
+		</template>
+		<template if:false={currentData.length}>
+			<p>No data available.</p>
+		</template>
+	</lightning-card>
+	<!-- start single alert -->
+	<div class="alert alert-info-light d-flex align-items-center">
+		<div class="alert-icon">
+			<i class="lni lni-play"></i>
+		</div>
+		<div class="alert-message">
+			<h5 class="message-title">This is a default message</h5>
+			<p class="text">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				Nesciunt a in, ullam. Lorem ipsum dolor sit amet,
+				consectetur adipisicing.
+			</p>
+		</div>
+	</div>
+	<!-- end single alert -->
+</template>

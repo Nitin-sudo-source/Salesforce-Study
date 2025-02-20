@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Custom Multiple File Uploader In LWC">
+        <div style="margin-left:4%">
+            <div>
+                <lightning-input type="file" 
+                                 label="" 
+                                 onchange={handleFileChanges} 
+                                 multiple>
+                </lightning-input>
+            </div>
+            
+            <div if:true={fileNames} class="slds-text-body_small slds-text-color_error">{fileNames}
+                <template if:true={showLoadingSpinner}>
+                    <lightning-spinner alternative-text="Uploading......" size="medium"></lightning-spinner>
+                </template>
+            </div><br />
+
+            <lightning-button class="slds-m-top--medium" 
+                              label="Upload Files" 
+                              onclick={handleSaveFiles} 
+                              variant="brand">
+            </lightning-button>
+        </div><br />
+        <template if:true={data}>
+            <lightning-card title="Uploaded Files" icon-name="standard:account">
+                <div style="width: auto;">
+                    <lightning-datatable data={data} 
+                                         columns={columns} 
+                                         key-field="id">
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>

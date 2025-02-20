@@ -1,0 +1,234 @@
+<template>
+    <div>
+        <!-- Search page start -->
+        <template if:true={searchPage}>
+            <lightning-card style="width: 50%;text-align:center;">
+                <h1 class="my"> Search Page</h1>
+                <div style="Padding:10px;">
+                    <template if:true={showContinue}>
+                        <p style="text-align:right; margin-right:2% !important;"><lightning-button variant="success" label="Continue" type="button"
+                                onclick={handleContinue} icon-name="standard:output"
+                                icon-position="right"></lightning-button>
+                        </p><br/>
+                    </template>
+                    <lightning-record-edit-form>
+                        <table class="Table1Css">
+                            <tr>
+                                <th> Select Project</th>
+                                <td colspan="3">
+                                    <lightning-combobox value={projectId} options={projectOptions}
+                                        onchange={handleProjectChange}></lightning-combobox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> Phone</th>
+                                <td> <lightning-input type="Phone" label="Mobile" onchange={handlePhoneChange}
+                                        aria-placeholder="Enter Mobile" field-name="Phone"
+                                        variant="label-hidden"></lightning-input></td>
+                                <th>Email </th>
+                                <td>
+                                    <lightning-input type="email" label="Mobile" onchange={handleemailChange}
+                                        field-name="Email" aria-placeholder="Enter Email" variant="label-hidden">
+                                    </lightning-input>
+                                </td>
+                            </tr>
+                        </table>
+                    </lightning-record-edit-form><br />
+                    <p style="text-align: center;"><lightning-button variant="success" label="Search" type="button"
+                            onclick={handleSearch} icon-name="utility:search" icon-position="left"></lightning-button>
+                    </p>
+                </div>
+            </lightning-card>
+        </template>
+    </div>
+    <template if:true={showData}>
+    <lightning-card>
+        <div style="Padding:10px;">
+            <table if:true={searchResult} class="Table1Css">
+                <template for:each={searchResult} for:item="record">
+                    <tr key={record.Id}>
+                        <th colspan="3" style="text-align:center;background-color:rgb(0, 128, 255) !important">{record.section}
+                            Found</th>
+                    </tr>
+                    <tr key={record.Id}>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Owner Id</th>
+                    </tr>
+                    <tr key={record.Id}>
+                        <td>{record.Name}</td>
+                        <td>{record.Email}</td>
+                        <td>{record.Owner.Name}</td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+    </lightning-card>
+    </template>
+    <!-- Search page End -->
+
+
+
+
+
+
+
+    <!-- 1 Page start -->
+    <lightning-card>
+        <template if:true={firstPage}>
+            <h1 class="my" style="font-size:16px !important;"> Basic Details</h1><br/>
+            <div style="Padding:10px;">
+                <template if:true={firstPage}>
+                    <p style="text-align:right; margin-right:2% !important;"><lightning-button variant="success" label="Next" type="button"
+                        onclick={handleNext1} icon-name="standard:output"
+                        icon-position="right"></lightning-button>
+                </p><br/>
+                </template>
+            <lightning-record-edit-form object-api-name="Site_Visit__c">
+                <table class="Table1Css">
+                    <tr>
+                        <th>First Name</th>
+                        <td>
+                            <lightning-input-field field-name="First_Name__c" name="First_Name__c"
+                                value={svWrapper.sv.First_Name__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                        <th>Last Name</th>
+                        <td>
+                            <lightning-input-field field-name="Last_Name__c" name="Last_Name__c"
+                                value={svWrapper.sv.Last_Name__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Mobile</th>
+                        <td>
+                            <lightning-input-field field-name="Mobile__c" name="Mobile__c"
+                                value={svWrapper.sv.Mobile__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                        <th>Configuration</th>
+                        <td>
+                            <lightning-input-field field-name="Configuration__c" name="Configuration__c"
+                                value={svWrapper.sv.Configuration__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                    </tr>
+                </table>
+            </lightning-record-edit-form>
+            </div>
+        </template>
+ <!-- 1 Page start End -->
+
+
+
+ <!-- 2 secondPage start -->
+        <template if:true={secondPage}>
+            <h1 class="my" style="font-size:16px !important;">Address Details</h1><br/>
+            <div style="Padding:10px;">
+                <template if:true={secondPage}>
+                    <p style="text-align:right; margin-right:2% !important;"><lightning-button variant="success" label="Next" type="button"
+                        onclick={handleNext2} icon-name="standard:output"
+                        icon-position="right"></lightning-button>
+                </p><br/>
+                </template>
+            <lightning-record-edit-form object-api-name="Site_Visit__c">
+                <table class="Table1Css">
+                    <tr>
+                        <th>Country</th>
+                        <td>
+                            <lightning-input-field field-name="Country__c" name="Country__c"
+                                value={svWrapper.sv.Country__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                        <th>State</th>
+                        <td>
+                            <lightning-input-field field-name="State__c" name="State__c"
+                                value={svWrapper.sv.State__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>City</th>
+                        <td>
+                            <lightning-input-field field-name="City__c" name="City__c"
+                                value={svWrapper.sv.City__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                        <th>Street</th>
+                        <td>
+                            <lightning-input-field field-name="Street__c" name="Street__c"
+                                value={svWrapper.sv.Street__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                    </tr>
+                </table>
+            </lightning-record-edit-form>
+            </div>
+        </template>
+ <!-- 2 secondPage end -->
+
+
+
+
+  <!-- 3 secondPage start -->
+        <template if:true={thirdPage}>
+            <h1 class="my" style="font-size:16px !important;">Source Details</h1><br/>
+            <div style="Padding:10px;">
+            <lightning-record-edit-form object-api-name="Site_Visit__c">
+                <table class="Table1Css">
+                    <tr>
+                        <th>Source</th>
+                        <td>
+                            <lightning-input-field field-name="Master_Source__c" name="Master_Source__c"
+                                value={svWrapper.sv.Master_Source__c} variant="label-hidden" onchange={handleSV}>
+                            </lightning-input-field>
+                        </td>
+                    </tr>
+                    <template if:true={showCPField}>
+                        <tr>
+                            <td colspan="2" class="slds-p-around_medium lgc-bg">
+                                    <lightning-input-field field-name="Channel_Partner__c" name="Channel_Partner__c"
+                                     value={svWrapper.sv.Channel_Partner__c} variant="label-hidden" onchange={handleSV}>
+                                   </lightning-input-field>
+                            </td>
+                        </tr>
+                        </template>
+                        <!-- <lightning-card  title="Signature Panel">
+                            <div class="c-container"> 
+                                <div style="width: 400px"> 
+                                    <lightning-input label="Enter text " type="text" value={name} onchange={signIt}></lightning-input>
+                                    <p>
+                                        {headerText}
+                                    </p>         
+                                    <p class="slds-m-bottom_small"> 
+                                        <canvas name="canvasItem" height="200" width="400px" style="border:2px solid rgb(136, 135, 135);
+                                        background: transparent;"></canvas>
+                                    </p>
+                                    <p class="slds-m-bottom_small"> 
+                                    <lightning-button variant="brand" label="Download Signature" title="Save" 
+                                        onclick={downloadSignature} class="slds-m-left_x-small"></lightning-button>
+                                    <lightning-button variant="brand" label="Save Signature" title="Save" 
+                                        onclick={saveSignature} class="slds-m-left_x-small"></lightning-button>
+                    
+                                    <lightning-button variant="brand" label="Clear" title="Clear" 
+                                        onclick={handleClearClick} class="slds-m-left_x-small"></lightning-button>
+                                    </p>
+                                </div>       
+                            </div>
+                        </lightning-card> -->
+                    
+                   
+                </table>
+            </lightning-record-edit-form>
+            </div>
+        </template>
+        <template if:true={thirdPage}>
+        <p style="text-align: center;"><lightning-button variant="success" label="submit" type="button"
+            onclick={saveData} icon-position="left"></lightning-button>
+    </p>
+    </template>
+    </lightning-card>
+    <!-- 1 Page end -->
+   
+</template>

@@ -1,0 +1,8 @@
+.custom-container{
+	color : black;
+}
+
+.slds-card {
+    box-shadow: var(--lwc-box-shadow-medium);
+    border-radius: 0.5rem;
+}

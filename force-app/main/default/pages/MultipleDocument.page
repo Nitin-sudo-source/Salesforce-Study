@@ -1,0 +1,52 @@
+<apex:page controller="AttachmentController">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var attachmentCount = 1;
+
+        function addAttachmentRow() {
+            attachmentCount++;
+            var newRow = '<tr id="attachmentRow' + attachmentCount + '">' +
+                '<td><input type="file" id="attachment' + attachmentCount + '" /></td>' +
+                '<td><button onclick="removeAttachmentRow(' + attachmentCount + ')">Remove</button></td>' +
+                '</tr>';
+            $('#attachmentTable').append(newRow);
+        }
+
+        function removeAttachmentRow(rowId) {
+            $('#attachmentRow' + rowId).remove();
+        }
+
+        function saveAttachments() {
+            alert('Inside Save');
+            var attachments = [];
+
+            for (var i = 1; i <= attachmentCount; i++) {
+                var fileInput = document.getElementById('attachment' + i);
+                if (fileInput.files.length > 0) {
+                    var file = fileInput.files[0];
+                    attachments.push(file);
+                }
+            }
+
+            if (attachments.length > 0) {
+                var formData = new FormData();
+                for (var j = 0; j < attachments.length; j++) {
+                    formData.append('attachments', attachments[j]);
+                }
+            }
+        }
+    </script>
+
+    <table id="attachmentTable">
+        <tr>
+            <th>Attachment</th>
+            <th>Action</th>
+        </tr>
+        <tr id="attachmentRow1">
+            <td><input type="file" id="attachment1" /></td>
+            <td><button onclick="removeAttachmentRow(1)">Remove</button></td>
+        </tr>
+    </table>
+    <button onclick="addAttachmentRow()">Add Attachment</button>
+    <button onclick="saveAttachments()">Save</button>
+</apex:page>

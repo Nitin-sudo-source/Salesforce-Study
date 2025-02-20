@@ -1,0 +1,40 @@
+<apex:page >
+<style>
+body
+{
+   background-color: blue; }
+   </style>
+	        <label><center>
+                
+         <legend>
+             <h2>
+                 Project Name 
+             </h2>
+                </legend>
+         </center> <br />
+         <center> <select name="Project">
+            <option>--None--</option>
+            <option>Tycoons</option>
+            <option>SaraBuilder.</option>
+            <option>Shapoorji.</option>
+            <option>Ziva</option>
+            <option>Aapte Builder</option>
+          </select>
+                </center>
+        </label>
+<center>
+	<p>
+		<label>Phone: <input type="text" /></label>
+	</p>
+    	<p>
+		<label>Email: <input type="Email" /></label>
+	</p>
+	<p>
+		<button type="Submit">Submit</button>
+	</p>
+    	<p>
+		<button type="New Customer">New Customer</button>
+	</p>
+
+</center>
+</apex:page>

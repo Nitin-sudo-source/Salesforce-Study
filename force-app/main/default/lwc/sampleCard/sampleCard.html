@@ -1,0 +1,37 @@
+<template>
+<lightning-card icon-name="standard:client">
+    <h1 class="my-heading"><b>Flipkart</b></h1>
+    <div class="table-container" style="border: 1px solid #ddd; display: flex;padding:12px;">
+       <div style="width: 15%; flex-grow: 1;Padding:10px;">
+<table style="border:1px solid black;">
+    <tr>
+        <th style="padding:5px;"> Flipkart           
+        </th>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div style="width: 75%; flex-grow: 1;padding:10px;">
+    <table style="border:1px solid black;padding:10px;">
+        <tr>
+        <th style="padding:5px;"> <lightning-button 
+            variant="success"
+            label="Detail" 
+            onclick={handleClick} 
+            ></lightning-button>
+        </th>
+        <td style="padding:5px;">
+            <lightning-button 
+            variant="destructive"
+            label="Selected" 
+            onclick={handleClick} 
+            ></lightning-button>
+        </td>
+    </tr>
+    </table>
+    </div>
+    </div>
+
+</lightning-card>
+
+</template>

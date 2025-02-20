@@ -1,0 +1,23 @@
+<apex:page showHeader="false" standardController="Opportunity" sidebar="false" lightningStylesheets="true">
+    <apex:includeLightning />  
+    <div id="LightningComponentid" />    
+    <script>
+    $Lightning.use("c:DrawingApp", function()
+                   {
+                       $Lightning.createComponent("c:uploadDrawing",
+                                                  { 
+                                                      recordId: '{!$CurrentPage.parameters.id}'
+
+
+                                                  },
+                                                  "LightningComponentid", 
+                                                    
+                                                  
+                                                  function(cmp) {
+                                                   
+                                                  });
+                      
+                   });
+    </script>
+   
+</apex:page>

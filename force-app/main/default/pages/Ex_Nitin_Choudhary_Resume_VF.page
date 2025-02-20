@@ -1,0 +1,21 @@
+<apex:page showHeader="false" sidebar="false"  >
+    <apex:includeLightning />  
+    <div id="LightningComponentid" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    
+    <script>
+    $Lightning.use("c:Ex_Nitin_Choudhary_Resume_APP", function()
+                   {
+                       $Lightning.createComponent("c:ex_nitin_choudhary_dashboard",
+                                                  { 
+                                                    
+                                                  },
+                                                  "LightningComponentid",
+                                                  function(cmp) {
+                                                      console.log('LWC Componenet added in VF page'+cmp);
+                                                  });
+                   });
+       
+    </script>
+</apex:page>

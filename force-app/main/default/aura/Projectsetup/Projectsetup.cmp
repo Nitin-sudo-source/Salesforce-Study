@@ -1,0 +1,46 @@
+<aura:component Controller="ProjectSetup" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="plist" type="String"/>
+    <aura:attribute name="selectedProjectId" type="Id"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="tlist" type="String"/>
+    <aura:attribute name="SelectedTowerId" type="Id" />
+    <aura:attribute name="floorMap" type="Map" default="{key :'value'}"/>
+    <aura:attribute name="sortList" type="Map"/>
+    
+    
+    <ui:inputSelect aura:id="opt" label="Select Project" change="{!c.onSelectTower}">
+        <option value="null">Select a Project</option>
+        <aura:iteration items="{!v.plist}" var="projlist">
+            <ui:inputSelectOption text="{!projlist.Id}" label="{!projlist.Name}" />
+       </aura:iteration>
+    </ui:inputSelect> 
+ 
+     <ui:inputSelect aura:id="opt2" label="Select Tower" change="{!c.onSelectUnit}"  >
+        <option value="null">Select a Tower</option>
+        <aura:iteration items="{!v.tlist}" var="tlist">
+            <ui:inputSelectOption text="{!tlist.Id}" label="{!tlist.Name}" />
+       </aura:iteration>
+    </ui:inputSelect> 
+    
+        <table>
+ 			<tbody>
+                  <aura:iteration items="{!v.floorMap}" var="a" indexVar="key">
+                    <tr >
+                       <td>
+                            <div class="slds-box slds-theme_shade slds-theme_alert-texture">
+                            <b><center>Floor</center>{!a.key}</b></div>
+                           
+                        </td>
+                        <aura:iteration items="{!a.value}" var="b" indexVar="key2">
+                         <th class ="slds-box slds-theme_success" scope="col">
+                          <div class="slds-truncate" title="Units">  
+                            <b><center> Unit </center>{!b.Name}</b>
+                             
+                          </div>
+                            </th>
+                        </aura:iteration>
+                      </tr>
+                </aura:iteration>  
+            </tbody>
+    </table>
+ 	 </aura:component>
