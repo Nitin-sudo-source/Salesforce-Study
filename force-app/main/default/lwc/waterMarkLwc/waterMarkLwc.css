@@ -1,0 +1,25 @@
+.watermark {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    overflow: visible;
+    opacity: 0.50;
+
+    
+  }
+ 
+  .watermark p {
+    position: absolute;
+    text-shadow: 2px;
+    text-overflow: clip;
+    top: 0;
+    left: 100;
+    color: rgb(236, 11, 11);
+    font-size: 25px;
+    pointer-events: none;
+    width: 100px;
+    height: 100px;
+    background-repeat: repeat;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+  }

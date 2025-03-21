@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Contact List" icon-name="standard:contact">
+          <template if:true={showData}>
+        <lightning-input
+            type="text"
+            label="Search Contacts"
+            onchange={handleSearch}
+            placeholder="Search by Name or Email">
+        </lightning-input>
+
+
+        <lightning-datatable
+            data={contacts}
+            columns={columns}
+            key-field="Id"
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onsort={handleSort}>
+        </lightning-datatable>
+    </template>
+
+    <template if:false={showData}>
+        NO Contact Found 
+    </template>
+
+        <!-- <c-pagination 
+            page-number={pageNumber}
+            onprevious={handlePrevious}
+            onnext={handleNext}>
+        </c-pagination> -->
+    </lightning-card>
+</template>

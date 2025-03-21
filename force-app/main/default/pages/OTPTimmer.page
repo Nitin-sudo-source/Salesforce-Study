@@ -1,0 +1,42 @@
+<apex:page >
+    <script>
+    let timerOn = true;
+    
+    function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+        
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        document.getElementById('timer').innerHTML = m + ':' + s;
+        remaining -= 1;
+        
+        if(remaining >= 0 && timerOn) {
+            setTimeout(function() {
+                timer(remaining);
+            }, 1000);
+            return;
+        }
+        
+        if(!timerOn) {
+            // Do validate stuff here
+            return;
+        }
+        
+        // Do timeout stuff here
+        alert('Timeout for otp');
+    }
+    
+    timer(120);
+    
+    
+    </script>
+    <html>
+        <body><br/>
+            <input type="text" name="otp" placeholer="Enter your otp"/>
+        <div>Time left = <span id="timer"></span></div> 
+            
+        </body>
+    </html>
+      
+</apex:page>

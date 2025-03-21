@@ -1,0 +1,35 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="selectedProject" type="String" />
+    <aura:attribute name="plist" type="Project__c[]" />
+    <aura:attribute name="selectedTower" type="String" />
+    <aura:attribute name="tlist" type="Tower__c[]" />
+    
+    <div>
+        <lightning:select name="Project" 
+                          class="slds-combobox_container slds-size_small"  
+                          label="Project" 
+                          aura:id="Project" value="{!v.selectedProject}" onchange="{!c.changeAction}" >
+                       <option value="">choose one...</option>
+                 <aura:iteration items="{!v.plist}" var="proj">
+                     {!proj.LastName}
+                     <!--<option text="{!proj.LastName}" value="{!proj.Id}" selected="{!proj.selected}" /> -->
+                      <option value="{!proj.Id}">{!proj.Name}</option>
+               </aura:iteration>
+               </lightning:select>
+                      </div>  
+    <div>
+        <lightning:select name="Tower" 
+                          class="slds-combobox_container slds-size_small"  
+                          label="Tower" 
+                          aura:id="Tower" value="{!v.selectedTower}" onchange="{!c.selectChange}" >
+                       <option value="">choose one...</option>
+                 <aura:iteration items="{!v.tlist}" var="tw">
+                     {!tw.LastName}
+                     <!--<option text="{!tw.LastName}" value="{!tw.Id}" selected="{!tw.selected}" /> -->
+                      <option value="{!tw.Id}">{!tw.Name}</option>
+               </aura:iteration>
+               </lightning:select>
+                      </div>  
+    selectedTower : {!v.selectedTower}
+
+</aura:component>

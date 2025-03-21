@@ -1,0 +1,40 @@
+<apex:page standardController="Account" renderAs="pdf">
+ 
+<apex:image id="EC_Logo" value="https://munnac798-dev-ed--c.documentforce.com/sfc/dist/version/renditionDownload?rendition=ORIGINAL_Jpg&versionId=0682v00000N9t3B&operationContext=DELIVERY&contentId=05T2v000021DWMA&page=0&d=/a/2v000000tTIB/hYWRKJ.xVIh2B2M1T4xl3h4EXaJT8Wl9XC9Tq_oDwz0&oid=00D2v000001YDSE&dpt=null&viewId=" width="200" height="100%" alt="Exceller Consultancy Logo" />
+ 
+<div style="font-family:sans-serif;"> 
+<h1>Welcome to Exceller Consultancy!</h1>
+</div>
+ 
+<div style="font-family:sans-serif;text-align:left;font-size:12pt;">
+<p>Thank you, <b><apex:outputText value=" {!Account.Name}"/></b>, for 
+   becoming a new account with Exceller Consultancy.</p>
+ 
+<p>Your account details are:</p>
+ 
+<table>
+<tr><th>Account Name</th>
+    <td><apex:outputText value="{!Account.Name}"/></td>
+    </tr>
+<tr><th>Account Rep</th>
+    <td><apex:outputText value="{!Account.Owner.Name}"/></td>
+    </tr>
+<tr><th>Customer Since</th>
+    <td><apex:outputText value="{0,date,long}">
+        <apex:param value="{!Account.CreatedDate}"/>
+        </apex:outputText></td>
+    </tr>
+</table>
+    
+<p>It's a pleasure to have you on board.  Please do not hesitate to contact us should you have any questions or concerns.</p>
+    
+<p>Sincerely,</p>
+    
+<p><apex:outputText value="{!Account.Owner.Name}"/></p>
+</div>
+
+<div style="font-family:sans-serif;text-align:left;color:#2f5a61;font-size:10pt;"><br/> Kalyan ,Thane Mumbai<br/>
+Birla College Road, MH 450301<br/>
+www.ExcellerConsultancy.com<br/> </div>
+    
+</apex:page>

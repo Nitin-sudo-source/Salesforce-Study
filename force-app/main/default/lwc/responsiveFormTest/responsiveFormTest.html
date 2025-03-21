@@ -1,0 +1,20 @@
+<template>
+    <lightning-card icon-name="custom:custom14">
+  <lightning-layout multiple-rows>
+     <lightning-layout-item size="12" 
+          small-device-size="9"
+          padding="around-small">
+
+<lightning-record-form
+    record-id={recordId}
+    object-api-name={objectApiName}
+    fields={fields}
+    columns="2"
+    mode="edit"
+    onsubmit={handleSubmit}
+>
+</lightning-record-form>
+</lightning-layout-item>
+</lightning-layout>
+</lightning-card>
+</template>

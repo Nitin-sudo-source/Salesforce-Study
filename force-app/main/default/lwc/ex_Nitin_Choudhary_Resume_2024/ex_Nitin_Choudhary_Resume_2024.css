@@ -1,0 +1,79 @@
+.resume-container {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin: 5px 0;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+}
+
+.job, .school {
+    margin-top: 10px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .resume-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .resume-container {
+        max-width: 600px;
+    }
+
+    header p {
+        font-size: 0.9em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .job h3, .school h3 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-container {
+        max-width: 100%;
+        padding: 10px;
+        border: none;
+    }
+
+    header p {
+        font-size: 0.8em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .job h3, .school h3 {
+        font-size: 1em;
+    }
+}

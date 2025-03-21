@@ -1,0 +1,15 @@
+<template>
+<!-- 1. Scenario: You need to display a paginated list of records in LWC, but the 
+list should only load more records when the user scrolls to the bottom. 
+How would you achieve this? -->
+
+<lightning-datatable
+    key-field="id"
+    data={getAllRecords}
+    show-row-number-column
+    row-number-offset={rowOffset}
+    hide-checkbox-column
+    columns={columns}
+    onrowaction={handleRowAction}>
+</lightning-datatable>
+</template>

@@ -1,0 +1,11 @@
+.heading{
+    padding-left: 0.10%;
+    font-size: 30px;
+    color: #295646;
+    font-variant: initial;
+    font-weight: 700;
+}
+.timer{
+    font-size: 30px;
+    padding:0 1rem;
+}

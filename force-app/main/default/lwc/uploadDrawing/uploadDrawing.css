@@ -1,0 +1,27 @@
+.form-title {
+    font-size: 26px;
+    font-weight: 600px;
+    color: black;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+  }
+  
+  .save-button {
+    margin-right: 10px;
+  }
+  
+  .cancel-button {
+    margin-left: 10px;
+  }
+  
+.th{
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bold;
+    width: 30%;
+}

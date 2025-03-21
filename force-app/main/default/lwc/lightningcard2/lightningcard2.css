@@ -1,0 +1,9 @@
+.parentcontainer{
+    width: 50px;
+
+}
+.childcontainer{
+    width: 50px;
+    text-align: right;
+    float: top ;
+}

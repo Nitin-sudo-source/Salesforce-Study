@@ -1,0 +1,6 @@
+<apex:page Controller="Print_Quotation" standardStylesheets="false" title="Oakmount Reality" applyHtmlTag="false" sidebar="false" showHeader="false" renderAs="pdf">
+<center><h1><i>OakMount Reality</i></h1>
+    <apex:image url="{!$Resource.ImagePdf}" width="720" height="950"/>
+</center>
+    
+</apex:page>

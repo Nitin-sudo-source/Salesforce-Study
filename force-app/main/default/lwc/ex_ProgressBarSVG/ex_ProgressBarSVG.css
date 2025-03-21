@@ -1,0 +1,56 @@
+/* Apply hover effect to paths */
+.skills-ring path {
+    cursor: pointer;
+    stroke-width: 30;
+    margin: 0 auto;
+    opacity: 0.6;
+    transition: stroke-width 0.3s, opacity 0.3s,transform 0.3s,transform-origin 0.3s;
+} 
+
+
+.skills-ring path:hover{
+    stroke-width: 40;
+    opacity: 100%;
+    transform-origin: center; 
+   
+}
+
+.skills-ring path:hover + .record-count-text {
+    display: block; 
+
+}
+
+.record-count-text {
+    display: none; /* Initially hide the count text */
+}
+
+
+
+/* Set default cursor */
+.cursor-default {
+    cursor: default;
+}
+
+/* Center the SVG */
+.skills-ring {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* Style for the text inside the circle */
+.skills-ring text {
+    font-size: 16px;
+    fill: #000;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+svg {
+    margin-top: 0.2rem;
+    margin-right: 0.5rem;
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}

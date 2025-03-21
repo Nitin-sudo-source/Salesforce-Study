@@ -1,0 +1,142 @@
+.section-label {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px 0 20px;
+    letter-spacing: 1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Spacing between icon and text */
+}
+
+/* Gradient Underline Effect */
+.section-label::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    border-radius: 2px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+/* Hover Effect on Label */
+.section-label:hover::after {
+    width: 70%;
+}
+
+/* Icon inside label */
+.section-label-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Picklist container styling */
+.picklist-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    align-items: center;
+}
+
+/* Picklist item */
+.picklist-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Top border effect */
+.picklist-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 6px;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Custom Colors */
+.picklist-item.like::before { background: #ff4081; }
+.picklist-item.smile::before { background: #ff4081; }
+.picklist-item.love::before { background: #ff5252; }
+.picklist-item.star::before { background: #ff4081; }
+.picklist-item.fire::before { background: #ff4081; }
+.picklist-item.world::before { background: #ff4081; }
+
+.picklist-item.config::before { background: #03a9f4; }
+
+
+/* Hover effect */
+.picklist-item:hover {
+    background: #f7e6ec;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.picklist-item.config:hover {
+    background: #f1f9ff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Selection effect */
+.picklist-item.selected {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1);
+    background-color: #f7e6ec;
+}
+
+/* Ensure the selected config item changes background color */
+.picklist-item.config.selected {
+    background-color: #def1fa !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+    transform: scale(1.1) !important;
+}
+
+
+
+/* Picklist icon */
+.picklist-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+/* Label inside picklist */
+.picklist-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Check icon for selected */
+.selected-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgb(202, 227, 243);
+    border-radius: 50%;
+    padding: 5px;
+}

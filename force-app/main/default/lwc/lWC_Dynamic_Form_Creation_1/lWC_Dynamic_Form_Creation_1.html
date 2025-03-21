@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : nitinSFDC@exceller.SFDoc
+  @group             : 
+  @last modified on  : 20-01-2025
+  @last modified by  : nitinSFDC@exceller.SFDoc
+-->
+<template>
+    <lightning-card variant="Narrow" title="Hello" icon-name="standard:contact">
+        <lightning-button-icon icon-name="utility:down" variant="border-filled" alternative-text="Show More"
+            slot="actions"></lightning-button-icon>
+        <p class="slds-p-horizontal_small">
+            <lightning-record-edit-form object-api-name="Contact">
+                <lightning-messages>Contact Form </lightning-messages>
+                <lightning-input-field field-name="FirstName" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="LastName" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Birthdate" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Phone" onchange={handleChange}></lightning-input-field>
+                <!--Picklist-->
+                <!-- submit -->
+                <!-- <lightning-button type="submit" label="Update record"></lightning-button> -->
+            </lightning-record-edit-form>
+
+
+        </p>
+        <p slot="footer"> </p>
+    </lightning-card>
+
+</template>

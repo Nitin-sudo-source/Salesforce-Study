@@ -1,0 +1,31 @@
+<template>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>File Type</th>
+                <th>Content Size</th>
+                <th>Last Modified Date</th>
+                <th>Download</th>
+                <th>Preview</th>
+                <!-- Add more table headers for other fields if needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={filesData} for:item="file">
+                <tr key={file.value.contentDocumentId}>
+                    <td>{file.value.title}</td>
+                    <td>{file.value.fileType}</td>
+                    <td>{file.value.contentSize}</td>
+                    <td>{file.value.lastModifiedDate}</td>
+                    <td> <a href={file.url} download>Download</a></td>
+                    <td>
+                        <lightning-card title="Image">
+                            <img key={file.value.contentDocumentId} src={file.imageUrl} alt={file.value.title} />
+                        </lightning-card>
+                    </td>
+               </tr>
+            </template>
+        </tbody>
+    </table>
+</template>

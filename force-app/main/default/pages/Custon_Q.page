@@ -1,0 +1,19 @@
+<apex:page standardController="Quotation__c" recordSetVar="quotationrecords" renderAs="pdf">   
+    <apex:pageBlock >                
+        <apex:pageBlockTable value="{!quotationrecords}" var="qr">
+            <table>
+               
+                    <apex:column value="{!qr.Agreement_Value__c}" />            
+               
+            <apex:column value="{!qr.GST_Amount__c}" />
+            <apex:column value="{!qr.Other_Charges__c}" />
+            <apex:column value="{!qr.Stamp_Duty_Registration__c}" />
+            <apex:column value="{!qr.Total_Amount__c}" />
+            </table>
+         
+        </apex:pageBlockTable>   
+        
+  
+     
+    </apex:pageBlock>    
+</apex:page>

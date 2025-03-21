@@ -1,0 +1,73 @@
+<template>
+    <lightning-card title="showLeadDetails" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <p class="slds-m-bottom_small">
+                <lightning-button label="View Leads" onclick={handleLoad}></lightning-button>
+            </p>
+        
+                <!--<template if:true={leads}>
+                    <template for:each={leads} for:item="Lead"></template>
+
+                    <lightning-datatable data={leads} columns={columns} key-field="Id"> </lightning-datatable>
+                </template>
+                <template if:true={error}>
+                    {error}
+                </template>   
+                </div>
+                </lightning-card>
+                </template>-->
+                <div class="slds-scrollable" style="height:50rem;width:24rem">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                            <template if:true={leads}>
+                            <tr>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Lead Name">Lead Name</div>
+                                  </th>
+                                  <th class="" scope="col">
+                                    <div class="slds-truncate" title="Lead Email">Email</div>
+                                  </th>
+                                  <th class="" scope="col">
+                                      <div class="slds-truncate" title="Lead Phone">Phone</div>
+                                    </th>
+                              </tr>
+                            </template>
+                        </thead>
+                        <tbody>
+                            <template for:each={leads} for:item="Lead">
+                                <tr key={Lead.Id}>
+                                    
+                                    <td>{Lead.Name}</td>
+                                    <td>{Lead.Email}</td>
+                                    <td>{Lead.Phone}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>   
+                </div>
+                </lightning-card>
+                </template>
+        
+                
+             <!--   <template if:true={leads}>
+                    <table>
+                        <template for:each={leads} for:item="Lead">
+                         <tr key={Lead.Id}>
+                            <th>{Lead.Name}</th>
+                            <th>{Lead.Email}</th>
+                            <th>{Lead.Phone}</th>
+                         </tr>
+                            
+                        
+                    </template>  
+                    </table>
+                <template for:each={leads} for:item="Lead">
+                    
+                    <p key={Lead.Id}>{Lead.Name}</p>
+                    
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>-->

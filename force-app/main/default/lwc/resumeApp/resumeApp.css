@@ -1,0 +1,32 @@
+/* .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.content-container {
+    display: flex;
+    flex: 1;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+} */
+
+img {
+    border-radius: 50%;
+}
+
+.bg-inverse {
+    background-color: #0d1117;
+    transition-property: background-color;
+    transition-duration: 0.7s;
+}
+
+.bg-not-dark {
+    background-color: #fff;
+    transition-property: background-color;
+    transition-duration: 0.7s;
+}

@@ -1,0 +1,95 @@
+<!--
+  @description       : 
+  @author            : nitinSFDC@exceller.SFDoc
+  @group             : 
+  @last modified on  : 21-03-2025
+  @last modified by  : nitinSFDC@exceller.SFDoc
+-->
+<template>
+    <lightning-card  title="My Card">
+
+            <h2 class="section-label">
+                <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+                Icons Type
+            </h2>
+
+            <div class="picklist-container">
+
+            <template for:each={options} for:item="option">
+                <div key={option.value} class={option.itemClass} onclick={handleSelection}
+                    data-value={option.value} data-label={option.label}>
+                    
+                    <div class="icon-wrapper">
+                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                            class="picklist-icon"></lightning-icon>
+                    </div>
+    
+                    <span class="picklist-label">{option.label}</span>
+    
+                    <template if:true={option.isSelected}>
+                        <lightning-icon icon-name="utility:check" size="x-small"
+                            class="selected-icon"></lightning-icon>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <!-- <div class="picklist-container">
+            <template for:each={salesStages} for:item="option">
+                <div key={option.value} class={option.itemClass} onclick={handleSelectionSales}
+                data-value={option.value} data-label={option.label}>
+            
+                    
+                    <div class="icon-wrapper">
+                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                            class="picklist-icon"></lightning-icon>
+                    </div>
+    
+                    <span class="picklist-label">{option.label}</span>
+    
+                    <template if:true={option.isSelected}>
+                        <lightning-icon icon-name="utility:check" size="x-small"
+                            class="selected-icon"></lightning-icon>
+                    </template>
+                </div>
+            </template>
+        </div> -->
+        
+        <h2 class="section-label">
+            <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+            Configuration Type
+        </h2>
+        
+
+        <div class="picklist-container">
+            <template for:each={configTypes} for:item="option">
+                <div key={option.value} class={option.itemClass} onclick={handleSelectionConfi}
+                    data-value={option.value} data-label={option.label}>
+                    
+                    <div class="icon-wrapper">
+                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                            class="picklist-icon"></lightning-icon>
+                    </div>
+    
+                    <span class="picklist-label">{option.label}</span>
+    
+                    <template if:true={option.isSelected}>
+                        <lightning-icon icon-name="utility:check" size="x-small"
+                            class="selected-icon"></lightning-icon>
+                    </template>
+                </div>
+            </template>
+        </div>
+        
+    
+        <template if:true={selectedLabels.length}>
+            <p class="selected-text">🎉 Selected: {selectedLabels}</p>
+        </template>
+        
+    </lightning-card>
+    
+    <!-- <lightning-input type="checkbox" label="Enable Multi-Select" checked={isMultiSelect} 
+        onchange={toggleMultiSelect} class="toggle-checkbox"></lightning-input> -->
+
+    
+</template>

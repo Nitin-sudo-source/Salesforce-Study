@@ -1,0 +1,11 @@
+<apex:page controller="JSON_EXAMPLE_01" >
+    Integer :{!integerPretty} <br/>
+    Decimal :{!decimalPretty} <br/>
+    Account :{!accountPretty} <br/>
+    
+    Integer :{!integerValue} <br/>
+    Decimal :{!decimalValue} <br/>
+    Account :{!accountValue} <br/>
+    
+    
+</apex:page>

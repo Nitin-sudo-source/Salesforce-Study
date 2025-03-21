@@ -1,0 +1,54 @@
+<template>
+  <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+    <div class="All">
+      <div class="header">
+        <h1>{name}</h1>
+        <h2>{position}</h2>
+        <div class="contact">
+          <p>{address}</p>
+          <p>{mobile}</p>
+          <p>{email}</p>
+        </div>
+      </div>
+  
+      <div class="objective">
+        <h3>Objective</h3>
+        <p>{objective}</p>
+      </div>
+  
+      <div class="education">
+        <h3>Education</h3>
+        <ul>
+          <li>{education.degree}, {education.college}, {education.location}</li>
+          <li>{education.degree}, {education.college}, {education.location}</li>
+        </ul>
+      </div>
+  
+      <div class="skills">
+        <h3>Key Skills</h3>
+        <ul>
+          <li>{skills}</li>
+          
+        </ul>
+      </div>
+  
+      <div class="certification">
+        <h3>Certification</h3>
+        <p>{certification}</p>
+      </div>
+  
+      <div class="personal-details">
+        <h3>Personal Details</h3>
+        <ul>
+          <li>Nationality: {nationality}</li>
+          <li>Date of Birth: {dob}</li>
+          <li>Status: {maritalStatus}</li>
+        </ul>
+      </div>
+  
+      <div class="download">
+        <lightning-button variant="brand" label="Download Resume" onclick={handleDownload}></lightning-button>
+      </div>
+    </div>
+  </lightning-card>
+  </template>

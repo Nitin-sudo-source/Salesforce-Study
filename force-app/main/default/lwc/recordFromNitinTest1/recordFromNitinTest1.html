@@ -1,0 +1,14 @@
+<template>
+    <lightning-card icon-name="standard:lead" alternative-text="Lead" title="Lead">
+
+    <div class="slds-var-m-around_medium">
+        <lightning-record-form
+        object-api-name={LeadObject}
+        columns="2"
+        mode="edit"
+        fields={myFields}
+        onsuccess={handleSuccess}>
+    </lightning-record-form>        
+    </div>
+    </lightning-card>
+</template>

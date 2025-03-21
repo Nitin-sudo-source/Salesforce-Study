@@ -1,0 +1,96 @@
+<apex:page Controller="Print_Quotation" docType="html-5.0" showHeader="false" standardStylesheets="true" renderAs="pdf" >
+         <html xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+                <head>
+            <apex:stylesheet value="{!URLFOR($Resource.Logo, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script type="text/javascript">__sfdcSessionId = '{!$Api.Session_Id}';</script>
+            <link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+            <script src="/soap/ajax/9.0/connection.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        </head>
+
+     </html>
+         <!--#col1,#col2{width:49%;display:inline-block;}  
+           
+            /* @page{
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            margin-left: 0.5cm;
+            margin-right:0.5cm;
+            size: 220mm 300mm;
+            border :1px solid black;
+            } */
+           
+            body{
+            font-size:0px;
+            line-height:0.5cm;
+            margin-Right:0.8cm;
+            margin-left:0.8cm;
+            margin-bottom:0.5cm;
+            margin-top:0.7cm;
+            text-align:justify;
+            font-family: Book Antiqua;
+            }
+           
+            @page{
+            size: A4 portrait;
+            border: 2px solid black;
+            }
+           
+           
+            tr.noBorder th {
+            border: 0px;
+            page-break-inside:auto ;
+            }
+           
+ 
+    
+           
+      
+!-->
+   	  <body>
+			 <div class="floatradd" >
+                                <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+                                   
+                                    <tr>
+                                        <td  align="center" style="font-weight:normal;   font-size:12px; color:#000; "><b>Date:</b></td>
+                                        <td  align="left"><apex:outputtext value="{0, date, dd'-'MM'-'yyyy}">
+                                            <apex:param value="{!Qlist.CreatedDate}"/>
+                                            </apex:outputtext> </td>
+                                    </tr>
+                                    <tr>
+                                        <td  align="center" style="font-weight:normal;   font-size:12px; color:#000; "><b>Quotation Name:</b></td>
+                                        <td  align="left">{!Qlist.Name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>Agreement Value :</b></td>
+                                        <td align="left">{!Qlist.Agreement_Value__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td   align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>Date :</b></td>
+                                        <td align="left">{!Qlist.Date__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td    align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>Stamp Duty Registration :</b></td>
+                                        <td align="left">{!Qlist.Stamp_Duty_Registration__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td    align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>GST Amount :</b></td>
+                                        <td  align="left">{!Qlist.GST_Amount__c}</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td    align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>Other Charges  :</b></td>
+                                        <td  align="left">{!Qlist.Other_Charges__c}</td>
+                                    </tr>
+                                     <tr>
+                                        <td    align="center" style="font-weight:normal; color:#000; font-size:12px; "><b>Total Amount :</b></td>
+                                        <td  align="left">{!Qlist.Total_Amount__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+     </body>
+
+</apex:page>

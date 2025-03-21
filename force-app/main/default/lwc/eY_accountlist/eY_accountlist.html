@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Account List" icon-name="standard:account">
+        <lightning-datatable
+            data={accounts}
+            columns={columns}
+            key-field="Id"
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onsort={handleSort}
+            onrowaction={handleRowAction}>
+        </lightning-datatable><br/>
+
+         <template if:true={selectedAccountId}>
+        <c-e-y-_contact-list account-id={selectedAccountId}></c-e-y-_contact-list>
+            <!-- <c-e-y-_opportunity-list account-id={selectedAccountId}></c-e-y-_opportunity-list> -->
+        </template>
+
+        <c-pagination
+            page-number={pageNumber} 
+            total-pages={totalPages}
+            onprevious={handlePrevious} 
+            onnext={handleNext}>
+        </c-pagination>
+    </lightning-card>
+</template>

@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-card">
+      <div class="slds-card__header slds-theme--default">
+        <h2 class="slds-text-heading_small slds-truncate">Walking Form</h2>
+      </div>
+      <div class="slds-card__body slds-p-around_medium">
+        <div class="slds-grid slds-wrap slds-justify-content_center">
+          <img src={imageUrl} alt="Image" class="slds-align_absolute-center" />
+          <div class="slds-box slds-theme--default slds-m-around_medium">
+            <lightning-combobox required="true" name="Project" label="Select Project" value={value}
+              placeholder="Select Project" options={options} onchange={handleChange}>
+            </lightning-combobox>
+            <div  style="display: flex; justify-content: center;flex-direction: column;">
+            <div class="slds-grid slds-wrap slds-m-top_medium" style="width:100%">
+              <lightning-input type="tel" name="phone" label="Phone" value={phone} onchange={handlePhoneChange}></lightning-input></br></br>
+              <lightning-input type="email" name="email" label="Email" value={email} onchange={handleEmailChange}></lightning-input>
+            </div>
+        </div>
+            <div class="slds-m-top_medium">
+              <lightning-button variant="brand" label="Search" title="search" onclick={handlesaveClick}></lightning-button>
+              <lightning-button variant="Destructive" label="Cancel" title="cancel" onclick={handlecancelClick} class="slds-m-left_x-small"></lightning-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
