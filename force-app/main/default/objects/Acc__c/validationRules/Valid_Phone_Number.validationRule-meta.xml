@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Phone_Number</fullName>
+    <active>true</active>
+    <description>Enter the Valid phone number</description>
+    <errorConditionFormula>LEN(Mobile_Number__c) &lt;10</errorConditionFormula>
+    <errorDisplayField>Mobile_Number__c</errorDisplayField>
+    <errorMessage>Invalid Number</errorMessage>
+</ValidationRule>

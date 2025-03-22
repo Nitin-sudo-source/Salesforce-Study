@@ -2,16 +2,51 @@
   @description       : 
   @author            : nitinSFDC@exceller.SFDoc
   @group             : 
-  @last modified on  : 21-03-2025
+  @last modified on  : 22-03-2025
   @last modified by  : nitinSFDC@exceller.SFDoc
 -->
 <template>
     <lightning-card  title="My Card">
 
-            <h2 class="section-label">
-                <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
-                Icons Type
-            </h2>
+     <template if:true={showFirstPage}>
+        <div class="container">
+            <h2 class="title">🌍 Select Your Country Code</h2>
+    
+            <!-- Search Input -->
+            <div class="search-box">
+                <input type="text"  value={searchQuery} class="search-input" placeholder="🔍 Search country..." oninput={handleSearch} />
+                <input type="text" class="search-input" placeholder="Search here...">
+                <span class="search-icon">🔍</span>
+
+            </div>
+    
+            <!-- Country Code List -->
+            <div class="country-list" onclick={toggleDropdown}>
+                <template for:each={filteredCountries} for:item="country">
+                    <div key={country.code} class="country-item" onclick={handleCountrySelect} data-code={country.code} data-name={country.name} data-dialcode={country.dial_code}>
+                        <img src={country.flag} class="flag" alt="flag" />
+
+                        <span class="flag">{country.dial_code}</span>
+                        <span class="country-name">{country.name}</span>
+                        <span class="code">{country.code}</span>
+                    </div>
+                </template>
+            </div>
+    
+            <!-- Selected Country Code -->
+            <div class="selected-code">
+                Selected: <strong>{selectedCountry}</strong>
+            </div>
+        </div>
+
+     </template>
+    <template if:true={showSecondPage}>
+                <h2 class="section-label">
+                    <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+                    Icons Type
+                </h2>
+          
+           
 
             <div class="picklist-container">
 
@@ -23,28 +58,7 @@
                         <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
                             class="picklist-icon"></lightning-icon>
                     </div>
-    
-                    <span class="picklist-label">{option.label}</span>
-    
-                    <template if:true={option.isSelected}>
-                        <lightning-icon icon-name="utility:check" size="x-small"
-                            class="selected-icon"></lightning-icon>
-                    </template>
-                </div>
-            </template>
-        </div>
-
-        <!-- <div class="picklist-container">
-            <template for:each={salesStages} for:item="option">
-                <div key={option.value} class={option.itemClass} onclick={handleSelectionSales}
-                data-value={option.value} data-label={option.label}>
-            
                     
-                    <div class="icon-wrapper">
-                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
-                            class="picklist-icon"></lightning-icon>
-                    </div>
-    
                     <span class="picklist-label">{option.label}</span>
     
                     <template if:true={option.isSelected}>
@@ -53,14 +67,21 @@
                     </template>
                 </div>
             </template>
-        </div> -->
+        </div><br/>
+
+        <template if:true={selectedLabels.length}>
+            <div class="selected-container">
+                <p class="selected-value"><span class="emoji-icon">🎨</span> Selected Icons: {selectedLabels}</p>
+            </div>
+        </template><br/>
+    </template>
+
         
+    <template if:true={showThirdPage}>
         <h2 class="section-label">
             <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
             Configuration Type
         </h2>
-        
-
         <div class="picklist-container">
             <template for:each={configTypes} for:item="option">
                 <div key={option.value} class={option.itemClass} onclick={handleSelectionConfi}
@@ -79,17 +100,35 @@
                     </template>
                 </div>
             </template>
-        </div>
-        
-    
-        <template if:true={selectedLabels.length}>
-            <p class="selected-text">🎉 Selected: {selectedLabels}</p>
-        </template>
-        
-    </lightning-card>
-    
-    <!-- <lightning-input type="checkbox" label="Enable Multi-Select" checked={isMultiSelect} 
-        onchange={toggleMultiSelect} class="toggle-checkbox"></lightning-input> -->
+        </div><br/>
+        <template if:true={selectedConfiguration.length}>
+            <div class="selected-container">
+                <p class="selected-value"><span class="emoji-icon">🏡</span> Selected Configuration: {selectedConfiguration} </p>
+                </div>
 
+        </template>
+    </template>
+
+
+
+    <div class="carousel-nav">
+        <!-- Previous Button -->
+        <button class="carousel-btn btn-prev" onclick={handlePrevious}>
+            <i class="fas fa-chevron-left" ></i>
+        </button>
     
+        <!-- Next Button -->
+        <button class="carousel-btn btn-next" onclick={handlenext}>
+            <i class="fas fa-chevron-right" ></i>
+        </button>
+    </div>
+    
+
+
+       
+        
+
+        
+        
+    </lightning-card>    
 </template>

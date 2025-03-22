@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : nitinSFDC@exceller.SFDoc
  * @group             : 
- * @last modified on  : 20-03-2025
+ * @last modified on  : 22-03-2025
  * @last modified by  : nitinSFDC@exceller.SFDoc
 **/
 import { LightningElement, track } from 'lwc';
@@ -10,7 +10,95 @@ import { LightningElement, track } from 'lwc';
 export default class Ex_DynamicPickListComp extends LightningElement {
 
     @track isMultiSelect = false;
+
+    @track showFirstPage = false;
+    @track showSecondPage = false;
+    @track showThirdPage = false;
     @track selectedLabels = [];
+    @track selectedConfiguration = [];
+    @track searchQuery = '';
+    @track selectedCountry = '';
+    @track mobileNumber = '';
+    @track email = '';
+    @track showDropdownList = false;
+
+    @track selectedFlag = 'https://flagcdn.com/w40/in.png';
+
+    @track countries = [
+        { code: 'IN', name: 'India', dial_code: '+91', flag: 'https://flagcdn.com/w40/in.png' },
+        { code: 'US', name: 'United States', dial_code: '+1', flag: 'https://flagcdn.com/w40/us.png' },
+        { code: 'UK', name: 'United Kingdom', dial_code: '+44', flag: 'https://flagcdn.com/w40/gb.png' },
+        { code: 'CA', name: 'Canada', dial_code: '+1', flag: 'https://flagcdn.com/w40/ca.png' },
+        { code: 'AU', name: 'Australia', dial_code: '+61', flag: 'https://flagcdn.com/w40/au.png' }
+    ];
+    
+    get filteredCountries() {
+        return this.searchQuery
+            ? this.countries.filter(country =>
+                  country.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+              )
+            : this.countries;
+    }
+
+    handleSearch(event) {
+        this.searchQuery = event.target.value;
+        console.log('searchQuery '+JSON.stringify(this.searchQuery));
+        console.log('filterd: '+JSON.stringify(this.filteredCountries));
+        
+        this.showDropdownList = true;
+    }
+
+    handleCountrySelect(event) {
+        const code = event.currentTarget.dataset.code;
+        const name = event.currentTarget.dataset.name;
+        const dialCode = event.currentTarget.dataset.dialcode;
+
+        this.selectedCountry = `${code} ${name} ${dialCode}`;
+        console.log('selectedCountry '+ JSON.stringify(this.selectedCountry));
+
+        this.searchQuery = this.selectedCountry;
+        console.log('searchQuery '+JSON.stringify(this.searchQuery));
+
+
+        this.showDropdownList = false;
+    }
+
+
+    handleMobileChange(event) {
+        this.mobileNumber = event.target.value;
+    }
+
+    get countryDropdownClass() {
+        return this.showDropdownList ? 'country-list show' : 'country-list hidden';
+    }
+
+    toggleDropdown() {
+        this.showDropdownList = !this.showDropdownList;
+    }
+
+    handleOutsideClick(event) {
+        if (!this.template.querySelector('.container').contains(event.target)) {
+            this.showDropdownList = false;
+        }
+    }
+
+    connectedCallback() {
+        document.addEventListener('click', this.handleOutsideClick.bind(this));
+        this.showFirstPage = true;
+    }
+
+    disconnectedCallback() {
+        document.removeEventListener('click', this.handleOutsideClick.bind(this));
+    }
+
+
+  
+
+
+
+
+
+
 
     options = [
         { label: 'Like', value: 'like', icon: 'utility:like', isSelected: false, itemClass: 'picklist-item like' },
@@ -58,13 +146,6 @@ export default class Ex_DynamicPickListComp extends LightningElement {
     handleSelection(event) {
         const selectedValue = event.currentTarget.dataset.value;
         const selectedLabel = event.currentTarget.dataset.label;
-
-        if (this.isMultiSelect) {
-            const option = this.options.find(opt => opt.value === selectedValue);
-            option.isSelected = !option.isSelected;
-            option.itemClass = option.isSelected ? `picklist-item ${option.value} selected bounce` : `picklist-item ${option.value}`;
-            this.selectedLabels = this.options.filter(opt => opt.isSelected).map(opt => opt.label);
-        } else {
             this.options.forEach(opt => {
                 opt.isSelected = false;
                 opt.itemClass = `picklist-item ${opt.value}`;
@@ -75,71 +156,33 @@ export default class Ex_DynamicPickListComp extends LightningElement {
             option.itemClass = `picklist-item ${option.value} selected glow`;
             this.selectedLabels = [selectedLabel];
         }
-    }
-
-    // handleSelectionSales(event) {
-    //     const selectedValue = event.currentTarget.dataset.value;
-    //     const selectedLabel = event.currentTarget.dataset.label;
-
-    //     if (this.isMultiSelect) {
-    //         const option = this.salesStages.find(opt => opt.value === selectedValue);
-    //         option.isSelected = !option.isSelected;
-    //         option.sales = option.isSelected ? `picklist-item ${option.value} selected bounce` : `picklist-item ${option.value}`;
-    //         this.selectedLabels = this.salesStages.filter(opt => opt.isSelected).map(opt => opt.label);
-    //     } else {
-    //         this.salesStages.forEach(opt => {
-    //             opt.isSelected = false;
-    //             opt.sales = `picklist-item ${opt.value}`;
-    //         });
-
-    //         const option = this.salesStages.find(opt => opt.value === selectedValue);
-    //         option.isSelected = true;
-    //         option.sales = `picklist-item ${option.value} selected glow`;
-    //         this.selectedLabels = [selectedLabel];
-    //     }
-    // }
+    
 
 
     handleSelectionConfi(event) {
         const selectedValue = event.currentTarget.dataset.value;
         const selectedLabel = event.currentTarget.dataset.label;
-
-        if (this.isMultiSelect) {
-            const option = this.configTypes.find(opt => opt.value === selectedValue);
-            option.isSelected = !option.isSelected;
-            option.class = option.isSelected ? `picklist-item ${option.value} selected bounce` : `picklist-item ${option.value}`;
-            this.selectedLabels = this.configTypes.filter(opt => opt.isSelected).map(opt => opt.label);
-        } else {
             this.configTypes.forEach(opt => {
                 opt.isSelected = false;
-                opt.class = `picklist-item ${opt.value}`;
+                opt.itemClass = `picklist-item config ${opt.value}`;
             });
 
             const option = this.configTypes.find(opt => opt.value === selectedValue);
             option.isSelected = true;
-            option.class = `picklist-item ${option.value} selected glow`;
-            this.selectedLabels = [selectedLabel];
+            option.itemClass = `picklist-item config ${option.value} selected glow`;
+            this.selectedConfiguration = [selectedLabel];
         }
-    }
 
-    // handleSelectStage(event) {
-    //     // const selectedValue = event.currentTarget.dataset.value;
-    //     // const selectedLabel = event.currentTarget.dataset.label;
 
-    //     this.selectedStage = event.currentTarget.dataset.value;
-    //     this.salesStages = this.salesStages.map(stage => ({
-    //         ...stage,
-    //         selected: stage.value === this.selectedStage
-    //     }));
-    // }
+        handlenext(){
+            this.showSecondPage = true;
+        }
 
-    // handleSelectConfig(event) {
-    //     this.selectedConfig = event.currentTarget.dataset.value;
-    //     this.configTypes = this.configTypes.map(config => ({
-    //         ...config,
-    //         selected: config.value === this.selectedConfig
-    //     }));
-    // }
+        handlePrevious(){
+               this.showThirdPage = false;
+                this.showSecondPage = false;
+                this.showFirstPage = true;
+        }
 
 
 
