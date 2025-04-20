@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Self-Use</fullName>
+        <default>false</default>
+        <label>Self-Use</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment</fullName>
+        <default>false</default>
+        <label>Investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Both</fullName>
+        <default>false</default>
+        <label>Both</label>
+    </customValue>
+    <customValue>
+        <fullName>For Someone Else</fullName>
+        <default>false</default>
+        <label>For Someone Else</label>
+    </customValue>
+    <customValue>
+        <fullName>Capital Gains</fullName>
+        <default>false</default>
+        <label>Capital Gains</label>
+    </customValue>
+    <masterLabel>Buying Purpose</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -2,15 +2,24 @@
  * @description       : 
  * @author            : nitinSFDC@exceller.SFDoc
  * @group             : 
- * @last modified on  : 22-03-2025
+ * @last modified on  : 20-04-2025
  * @last modified by  : nitinSFDC@exceller.SFDoc
 **/
 import { LightningElement, track } from 'lwc';
+import getPicklistValues from '@salesforce/apex/Ex_SiteVisitFormModern.getPicklistValues';
+import getProjectList from '@salesforce/apex/Ex_SiteVisitFormModern.getProjectList';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+import { loadStyle } from 'lightning/platformResourceLoader';
+import TAILWIND from '@salesforce/resourceUrl/tailwind';
+
 
 export default class Ex_DynamicPickListComp extends LightningElement {
 
-    @track isMultiSelect = false;
+    TAILWIND = TAILWIND;
 
+    @track isMultiSelect = false;
+    @track showDefaultPage = false;
     @track showFirstPage = false;
     @track showSecondPage = false;
     @track showThirdPage = false;
@@ -18,89 +27,34 @@ export default class Ex_DynamicPickListComp extends LightningElement {
     @track selectedConfiguration = [];
     @track searchQuery = '';
     @track selectedCountry = '';
+    @track showDropdownList = false;
+    @track ageOptions = [];
+    @track projectList = [];
     @track mobileNumber = '';
     @track email = '';
-    @track showDropdownList = false;
+    @track showToast = false;
+    @track toastMessage = '';
+    @track toastVariant = 'success'; // 'success' or 'error'
+    @track toastIcon = 'utility:success';
 
-    @track selectedFlag = 'https://flagcdn.com/w40/in.png';
-
-    @track countries = [
-        { code: 'IN', name: 'India', dial_code: '+91', flag: 'https://flagcdn.com/w40/in.png' },
-        { code: 'US', name: 'United States', dial_code: '+1', flag: 'https://flagcdn.com/w40/us.png' },
-        { code: 'UK', name: 'United Kingdom', dial_code: '+44', flag: 'https://flagcdn.com/w40/gb.png' },
-        { code: 'CA', name: 'Canada', dial_code: '+1', flag: 'https://flagcdn.com/w40/ca.png' },
-        { code: 'AU', name: 'Australia', dial_code: '+61', flag: 'https://flagcdn.com/w40/au.png' }
-    ];
-    
-    get filteredCountries() {
-        return this.searchQuery
-            ? this.countries.filter(country =>
-                  country.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-              )
-            : this.countries;
-    }
-
-    handleSearch(event) {
-        this.searchQuery = event.target.value;
-        console.log('searchQuery '+JSON.stringify(this.searchQuery));
-        console.log('filterd: '+JSON.stringify(this.filteredCountries));
-        
-        this.showDropdownList = true;
-    }
-
-    handleCountrySelect(event) {
-        const code = event.currentTarget.dataset.code;
-        const name = event.currentTarget.dataset.name;
-        const dialCode = event.currentTarget.dataset.dialcode;
-
-        this.selectedCountry = `${code} ${name} ${dialCode}`;
-        console.log('selectedCountry '+ JSON.stringify(this.selectedCountry));
-
-        this.searchQuery = this.selectedCountry;
-        console.log('searchQuery '+JSON.stringify(this.searchQuery));
-
-
-        this.showDropdownList = false;
-    }
-
-
-    handleMobileChange(event) {
-        this.mobileNumber = event.target.value;
-    }
-
-    get countryDropdownClass() {
-        return this.showDropdownList ? 'country-list show' : 'country-list hidden';
-    }
-
-    toggleDropdown() {
-        this.showDropdownList = !this.showDropdownList;
-    }
-
-    handleOutsideClick(event) {
-        if (!this.template.querySelector('.container').contains(event.target)) {
-            this.showDropdownList = false;
-        }
-    }
 
     connectedCallback() {
-        document.addEventListener('click', this.handleOutsideClick.bind(this));
-        this.showFirstPage = true;
+        loadStyle(this, TAILWIND)
+            .then(() => {
+                console.log('Tailwind loaded successfully');
+            })
+            .catch(error => {
+                console.error('Failed to load Tailwind', error);
+            });
     }
 
-    disconnectedCallback() {
-        document.removeEventListener('click', this.handleOutsideClick.bind(this));
-    }
 
+    @track formType = [
+        { label: 'Fresh', value: 'Fresh', icon: 'utility:Fresh', isSelected: false, itemClass: 'picklist-item form-type' },
+        { label: 'Revisit', value: 'Revisit', icon: 'utility:emoji', isSelected: false, itemClass: 'picklist-item form-type' }
+    ];
 
-  
-
-
-
-
-
-
-
-    options = [
+    @track options = [
         { label: 'Like', value: 'like', icon: 'utility:like', isSelected: false, itemClass: 'picklist-item like' },
         { label: 'Smile', value: 'smile', icon: 'utility:emoji', isSelected: false, itemClass: 'picklist-item smile' },
         { label: 'Love', value: 'love', icon: 'utility:favorite', isSelected: false, itemClass: 'picklist-item love' },
@@ -109,82 +63,244 @@ export default class Ex_DynamicPickListComp extends LightningElement {
         { label: 'World', value: 'world', icon: 'utility:world', isSelected: false, itemClass: 'picklist-item world' }
     ];
 
-
-    @track salesStages = [
-        { label: 'Prospecting', value: 'prospecting', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Qualification', value: 'qualification', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Needs Analysis', value: 'needs_analysis', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Value Proposition', value: 'value_proposition', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Id. Decision Makers', value: 'decision_makers', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Perception Analysis', value: 'perception_analysis', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Proposal/Price Quote', value: 'price_quote', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Negotiation/Review', value: 'negotiation_review', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Closed Won', value: 'closed_won', isSelected: false, itemClass: 'picklist-item stage' },
-        { label: 'Closed Lost', value: 'closed_lost', isSelected: false, itemClass: 'picklist-item stage' }
-    ];
-    
     @track configTypes = [
         { label: '1 BHK', value: '1bhk', itemClass: 'picklist-item config', isSelected: false },
         { label: '2 BHK', value: '2bhk', itemClass: 'picklist-item config', isSelected: false },
         { label: '3 BHK', value: '3bhk', itemClass: 'picklist-item config', isSelected: false },
         { label: 'Studio', value: 'studio', itemClass: 'picklist-item config', isSelected: false }
     ];
-    
 
-
-    // Toggle Multi-Select Mode
-    toggleMultiSelect(event) {
-        this.isMultiSelect = event.target.checked;
-        this.selectedLabels = [];
-        this.options.forEach(option => {
-            option.isSelected = false;
-            option.itemClass = `picklist-item ${option.value}`;
-        });
+    handleChangeMobile(event) {
+        this.mobileNumber = event.target.value;
     }
 
-    // Handle Selection
+    handleChangeEmail(event) {
+        this.email = event.target.value;
+    }
+
+    handleSubmit() {
+        const isValid = /^[0-9]{10}$/.test(this.mobileNumber);
+        console.log('isValid: ' + isValid);
+
+        if (isValid) {
+            this.customToast('Valid Mobile Number Entered!', 'success', 'utility:success');
+        } else {
+            this.customToast('Please enter a valid 10-digit mobile number.', 'error', 'utility:error');
+        }
+    }
+
+    customToast(message, variant, icon) {
+        const event = new ShowToastEvent({
+            title: variant === 'success' ? 'Success' : 'Error',
+            message: message,
+            variant: variant,
+            mode: 'dismissable'
+        });
+        this.toastVariant = variant;
+        this.toastIcon = icon;
+        this.showToast = true;
+        this.dispatchEvent(event);
+    }
+
+    handleMobileChange(event) {
+        this.mobileNumber = event.target.value;
+    }
+    connectedCallback() {
+        this.showDefaultPage = true;
+        this.loadPicklistValues();
+        this.getgetProjectList();
+    }
+
+    getgetProjectList() {
+        getProjectList()
+            .then(result => {
+                this.projectList = result.map(value => {
+                    return {
+                        Id: value.Id,
+                        Name: value.Name,
+                        label: value.Name,
+                        value: value.Id,
+                        //icon: this.getIcon(value.Name),
+                        isSelected: false,
+                        itemClass: `picklist-item project ${value}`,
+                    };
+                });
+                console.log('projectList: ' + JSON.stringify(this.projectList));
+            }).catch(error => {
+                console.error('Error in getting list of projects: ', error);
+            });
+    }
+
+    loadPicklistValues() {
+        getPicklistValues({ fieldName: 'Age__c' })
+            .then(data => {
+                this.ageOptions = data.map(value => {
+                    const formattedValue = value.toLowerCase().replace(/\s+/g, '_');
+                    const isSpecialItem = (formattedValue === '41_to_45_years');
+                    return {
+                        label: value,
+                        value: formattedValue,
+                        icon: this.getIcon(value),
+                        isSelected: false,
+                        isSpecialItem: isSpecialItem,
+                        itemClass: `picklist-item age ${formattedValue}${isSpecialItem ? ' special-item' : ''}`
+                    };
+                });
+                console.log('age: ' + JSON.stringify(this.ageOptions));
+            })
+            .catch(error => {
+                console.error('Error fetching picklist values:', error);
+            });
+    }
+
+    getIcon(value) {
+        const iconMap = {
+            'Less than 25 Years': 'utility:user',
+            '25 to 30 Years': 'utility:user',
+            '31 to 35 Years': 'utility:user',
+            '36 to 40 Years': 'utility:user',
+            '41 to 45 Years': 'utility:user',
+            '46 to 50 Years': 'utility:user',
+            '51 to 60 Years': 'utility:user',
+            'Above 60': 'utility:user'
+        };
+        return iconMap[value] || 'utility:question';
+    }
+
+    // handleSelection(event) {
+    //     const selectedValue = event.currentTarget.dataset.value;
+    //     const selectedLabel = event.currentTarget.dataset.label;
+    //     const dataName = event.currentTarget.dataset.name;
+
+    //     if (dataName === 'Age__c') {
+    //         this.ageOptions.forEach(opt => {
+    //             opt.isSelected = false;
+    //             opt.itemClass = `picklist-item age ${opt.value}`;
+    //         });
+
+    //         const option = this.ageOptions.find(opt => opt.value === selectedValue);
+    //         option.isSelected = true;
+    //         option.itemClass = `picklist-item age ${option.value} selected glow`;
+    //         console.log('Age__c ' + JSON.stringify(this.ageOptions));
+    //         this.customToast(selectedLabel + ' is Selected', 'success', 'utility:success');
+
+    //     } else if (dataName === 'Icons__c') {
+    //         this.options.forEach(opt => {
+    //             opt.isSelected = false;
+    //             opt.itemClass = `picklist-item ${opt.value}`;
+    //         });
+
+    //         const option = this.options.find(opt => opt.value === selectedValue);
+    //         option.isSelected = true;
+    //         option.itemClass = `picklist-item ${option.value} selected glow`;
+    //         console.log('Icons__c ' + JSON.stringify(this.options));
+    //         this.customToast(selectedLabel + ' is Selected', 'success', 'utility:success');
+
+    //     } else if (dataName === 'Form_Type__c') {
+    //         this.formType.forEach(opt => {
+    //             opt.isSelected = false;
+    //             opt.itemClass = `picklist-item form-type ${opt.value}`;
+    //         });
+    //         const option = this.formType.find(opt => opt.value === selectedValue);
+    //         option.isSelected = true;
+    //         option.itemClass = `picklist-item form-type ${option.value} selected glow`;
+    //         console.log('Form_Type__c ' + JSON.stringify(this.formType));
+    //         this.customToast(selectedLabel + ' is Selected', 'success', 'utility:success');
+
+    //     } else if (dataName === 'Project__c') {
+    //         this.projectList.forEach(opt => {
+    //             opt.isSelected = false;
+    //             opt.itemClass = `picklist-item project ${opt.value}`;
+    //         });
+
+    //         const option = this.projectList.find(opt => opt.value === selectedValue);
+    //         option.isSelected = true;
+    //         option.itemClass = `picklist-item project ${option.value} selected glow`;
+    //         this.customToast(selectedLabel + ' is Selected', 'success', 'utility:success');
+
+    //     } else if (dataName === 'Configuration__c') {
+    //         this.configTypes.forEach(opt => {
+    //             opt.isSelected = false;
+    //             opt.itemClass = `picklist-item config ${opt.value}`;
+    //         });
+
+    //         const option = this.configTypes.find(opt => opt.value === selectedValue);
+    //         option.isSelected = true;
+    //         option.itemClass = `picklist-item config ${option.value} selected glow`;
+    //         this.customToast(selectedLabel + ' is Selected', 'success', 'utility:success');
+
+    //     } else {
+    //         alert('No Valid Data Found Data-Name: ' + dataName);
+    //     }
+    // }
+
+
     handleSelection(event) {
         const selectedValue = event.currentTarget.dataset.value;
         const selectedLabel = event.currentTarget.dataset.label;
-            this.options.forEach(opt => {
+        const dataName = event.currentTarget.dataset.name;
+    
+        const picklistMap = {
+            'Age__c': { list: this.ageOptions, baseClass: 'picklist-item age' },
+            'Icons__c': { list: this.options, baseClass: 'picklist-item' },
+            'Form_Type__c': { list: this.formType, baseClass: 'picklist-item form-type' },
+            'Project__c': { list: this.projectList, baseClass: 'picklist-item project' },
+            'Configuration__c': { list: this.configTypes, baseClass: 'picklist-item config' }
+        };
+    
+        if (picklistMap[dataName]) {
+            const { list, baseClass } = picklistMap[dataName];
+            list.forEach(opt => {
                 opt.isSelected = false;
-                opt.itemClass = `picklist-item ${opt.value}`;
+                opt.itemClass = `${baseClass} ${opt.value}`;
             });
-
-            const option = this.options.find(opt => opt.value === selectedValue);
-            option.isSelected = true;
-            option.itemClass = `picklist-item ${option.value} selected glow`;
-            this.selectedLabels = [selectedLabel];
+    
+            const option = list.find(opt => opt.value === selectedValue);
+            if (option) {
+                option.isSelected = true;
+                option.itemClass = `${baseClass} ${option.value} selected glow`;
+            }
+    
+            this.customToast(`${selectedLabel} is Selected`, 'success', 'utility:success');
+            console.log(`${dataName} => `, JSON.stringify(list));
+        } else {
+            alert('No Valid Data Found. Data-Name: ' + dataName);
         }
+    }
     
 
 
-    handleSelectionConfi(event) {
-        const selectedValue = event.currentTarget.dataset.value;
-        const selectedLabel = event.currentTarget.dataset.label;
-            this.configTypes.forEach(opt => {
-                opt.isSelected = false;
-                opt.itemClass = `picklist-item config ${opt.value}`;
-            });
+    handleNavigation(event) {
+        const action = event.target.dataset.action;
+        alert('Action: ' + action + '\n' + 'Selected: ' + event.target.value);
 
-            const option = this.configTypes.find(opt => opt.value === selectedValue);
-            option.isSelected = true;
-            option.itemClass = `picklist-item config ${option.value} selected glow`;
-            this.selectedConfiguration = [selectedLabel];
-        }
-
-
-        handlenext(){
-            this.showSecondPage = true;
-        }
-
-        handlePrevious(){
-               this.showThirdPage = false;
+        if (action === "next") {
+            if (this.showDefaultPage) {
+                this.showFirstPage = true;
+                this.showDefaultPage = false;
+            } else if (this.showFirstPage) {
+                this.showFirstPage = false;
+                this.showSecondPage = true;
+            } 
+            // else if (this.showSecondPage) {
+            //     this.showSecondPage = false;
+            //     this.showThirdPage = true;
+            // }
+        } else if (action === "prev") {
+            // if (this.showThirdPage) {
+            //     this.showThirdPage = false;
+            //     this.showSecondPage = true;
+            // } else
+             if (this.showSecondPage) {
                 this.showSecondPage = false;
                 this.showFirstPage = true;
+            } else if (this.showDefaultPage) {
+                this.showFirstPage = false;
+                this.showDefaultPage = true;
+            }else if (this.showFirstPage) {
+                this.showFirstPage = false;
+                this.showDefaultPage = true;
+            }
         }
-
-
-
-
+    }
 }

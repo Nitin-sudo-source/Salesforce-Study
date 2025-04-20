@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Household_Income__c</fullName>
+    <label>Household Income</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Below Rs. 15 lakhs</fullName>
+                <default>false</default>
+                <label>Below Rs. 15 lakhs</label>
+            </value>
+            <value>
+                <fullName>Rs. 16 Lakhs to 25 Lakhs</fullName>
+                <default>false</default>
+                <label>Rs. 16 Lakhs to 25 Lakhs</label>
+            </value>
+            <value>
+                <fullName>Rs. 26 Lakhs to 35 Lakhs</fullName>
+                <default>false</default>
+                <label>Rs. 26 Lakhs to 35 Lakhs</label>
+            </value>
+            <value>
+                <fullName>Rs. 36 Lakhs to 45 Lakhs</fullName>
+                <default>false</default>
+                <label>Rs. 36 Lakhs to 45 Lakhs</label>
+            </value>
+            <value>
+                <fullName>Rs. 46 Lakhs to 55 Lakhs</fullName>
+                <default>false</default>
+                <label>Rs. 46 Lakhs to 55 Lakhs</label>
+            </value>
+            <value>
+                <fullName>Above Rs. 55 Lakhs</fullName>
+                <default>false</default>
+                <label>Above Rs. 55 Lakhs</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

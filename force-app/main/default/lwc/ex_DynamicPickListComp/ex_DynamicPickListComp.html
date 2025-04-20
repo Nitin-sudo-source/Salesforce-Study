@@ -2,17 +2,125 @@
   @description       : 
   @author            : nitinSFDC@exceller.SFDoc
   @group             : 
-  @last modified on  : 22-03-2025
+  @last modified on  : 20-04-2025
   @last modified by  : nitinSFDC@exceller.SFDoc
 -->
 <template>
-    <lightning-card  title="My Card">
+    <lightning-card title="My Card" style="height: auto;">
 
-     <template if:true={showFirstPage}>
+            <div class="p-4 bg-blue-500 text-white rounded-lg shadow-lg">
+                Hello Tailwind in LWC!
+            </div>
+        
+        <template if:true={showDefaultPage}>
+            <h1 class="section-label"> Select Project </h1>
+
+            <div class="picklist-container">
+                <template for:each={projectList} for:item="option">
+                    <div key={option.value} class={option.itemClass} 
+                    onclick={handleSelection}
+                        data-value={option.value} data-label={option.label} data-name="Project__c">
+
+                        <div class="icon-wrapper">
+                            <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                                class="picklist-icon"></lightning-icon>
+                        </div>
+
+                        <span class="picklist-label">{option.label}</span>
+
+                        <template if:true={option.isSelected}>
+                            <lightning-icon icon-name="utility:check" size="x-small"
+                                class="selected-icon"></lightning-icon>
+                        </template>
+                    </div>
+                </template>
+
+            </div><br/>
+           
+            <h1 class="section-label"> Select Form Type </h1>
+            <div class="picklist-container">
+                <template for:each={formType} for:item="option">
+                    <div key={option.value} class={option.itemClass} onclick={handleSelection}
+                        data-value={option.value} data-label={option.label} data-name="Form_Type__c">
+
+                        <div class="icon-wrapper">
+                            <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                                class="picklist-icon"></lightning-icon>
+                        </div>
+
+                        <span class="picklist-label">{option.label}</span>
+
+                        <template if:true={option.isSelected}>
+                            <lightning-icon icon-name="utility:check" size="x-small"
+                                class="selected-icon"></lightning-icon>
+                        </template>
+                    </div>
+                </template>
+
+            </div>
+      
+
+        <div class="main-container">
+            <!-- Input Container -->
+            <div class="input-container">
+                <label for="phoneInput" class="label">Enter Your Mobile Number</label>
+                <div class="input-wrapper">
+                    <div class="icon-container">
+                        <lightning-icon icon-name="utility:phone_portrait" size="small"></lightning-icon>
+                    </div>
+                    <input type="tel" id="phoneInput" class="input-field" placeholder="123-456-7890"
+                        pattern="[0-9]{10}" value={mobileNumber} required onchange={handleChangeMobile} />
+                </div>
+
+                <!-- Email Address Input -->
+                <label for="emailInput" class="label">Enter Your Email Address</label>
+                <div class="input-wrapper">
+                    <div class="icon-container">
+                        <lightning-icon icon-name="utility:email" size="small"></lightning-icon>
+                    </div>
+                    <input type="email" id="emailInput" class="input-field" placeholder="example@email.com"
+                        value={email} required onchange={handleChangeEmail} />
+                </div>
+
+                  <!-- Email Address Input -->
+                  <label for="salutation" class="label">Enter Your Salutation</label>
+                  <div class="input-wrapper">
+                      <div class="icon-container">
+                          <lightning-icon icon-name="utility:user" size="small"></lightning-icon>
+                      </div>
+                      <input type="email" id="salutation" class="input-field" placeholder="Enter Your Salutation"
+                          value={email} required onchange={handleChangeEmail} />
+                  </div>
+
+
+                  <label for="FirstName" class="label">Enter Your First Name</label>
+                  <div class="input-wrapper">
+                      <div class="icon-container">
+                          <lightning-icon icon-name="utility:user" size="small"></lightning-icon>
+                      </div>
+                      <input type="email" id="FirstName" class="input-field" placeholder="Enter Your First Name"
+                          value={email} required onchange={handleChangeEmail} />
+                  </div>
+
+                  <label for="LastName" class="label">Enter Your Last Name</label>
+                  <div class="input-wrapper">
+                      <div class="icon-container">
+                          <lightning-icon icon-name="utility:user" size="small"></lightning-icon>
+                      </div>
+                      <input type="email" id="LastName" class="input-field" placeholder="Enter Your Last Name"
+                          value={email} required onchange={handleChangeEmail} />
+                  </div>
+
+                <!-- <button class="submit-button" onclick={handleSubmit}>Submit</button> -->
+            </div>
+        </div><br /><br /><br /><br /><br />
+    </template>
+
+        <!-- <template if:true={showFirstPage}>
         <div class="container">
             <h2 class="title">🌍 Select Your Country Code</h2>
     
-            <!-- Search Input -->
+           
             <div class="search-box">
                 <input type="text"  value={searchQuery} class="search-input" placeholder="🔍 Search country..." oninput={handleSearch} />
                 <input type="text" class="search-input" placeholder="Search here...">
@@ -20,7 +128,7 @@
 
             </div>
     
-            <!-- Country Code List -->
+           
             <div class="country-list" onclick={toggleDropdown}>
                 <template for:each={filteredCountries} for:item="country">
                     <div key={country.code} class="country-item" onclick={handleCountrySelect} data-code={country.code} data-name={country.name} data-dialcode={country.dial_code}>
@@ -33,102 +141,116 @@
                 </template>
             </div>
     
-            <!-- Selected Country Code -->
+           
             <div class="selected-code">
                 Selected: <strong>{selectedCountry}</strong>
             </div>
         </div>
 
-     </template>
-    <template if:true={showSecondPage}>
-                <h2 class="section-label">
-                    <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
-                    Icons Type
-                </h2>
-          
-           
+     </template> -->
+        <template if:true={showFirstPage}>
+
+            <h2 class="section-label">
+                <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+                Age Details
+            </h2>
+
 
             <div class="picklist-container">
 
-            <template for:each={options} for:item="option">
-                <div key={option.value} class={option.itemClass} onclick={handleSelection}
-                    data-value={option.value} data-label={option.label}>
-                    
-                    <div class="icon-wrapper">
-                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
-                            class="picklist-icon"></lightning-icon>
+                <template for:each={ageOptions} for:item="option">
+                    <div key={option.value} class={option.itemClass} onclick={handleSelection} data-value={option.value}
+                        data-label={option.label} data-name="Age__c">
+
+                        <div class="icon-wrapper">
+                            <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                                class="picklist-icon"></lightning-icon>
+                        </div>
+
+                        <span class="picklist-label">{option.label}</span>
+
+                        <template if:true={option.isSelected}>
+                            <lightning-icon icon-name="utility:check" size="x-small"
+                                class="selected-icon"></lightning-icon>
+                        </template>
                     </div>
-                    
-                    <span class="picklist-label">{option.label}</span>
-    
-                    <template if:true={option.isSelected}>
-                        <lightning-icon icon-name="utility:check" size="x-small"
-                            class="selected-icon"></lightning-icon>
-                    </template>
-                </div>
-            </template>
-        </div><br/>
+                </template>
+            </div><br />
 
-        <template if:true={selectedLabels.length}>
-            <div class="selected-container">
-                <p class="selected-value"><span class="emoji-icon">🎨</span> Selected Icons: {selectedLabels}</p>
-            </div>
-        </template><br/>
-    </template>
 
-        
-    <template if:true={showThirdPage}>
-        <h2 class="section-label">
-            <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
-            Configuration Type
-        </h2>
-        <div class="picklist-container">
-            <template for:each={configTypes} for:item="option">
-                <div key={option.value} class={option.itemClass} onclick={handleSelectionConfi}
-                    data-value={option.value} data-label={option.label}>
-                    
-                    <div class="icon-wrapper">
-                        <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
-                            class="picklist-icon"></lightning-icon>
+            <h2 class="section-label">
+                <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+                Icons Type
+            </h2>
+
+
+
+
+
+            <div class="picklist-container">
+                <template for:each={options} for:item="option">
+                    <div key={option.value} class={option.itemClass} onclick={handleSelection} 
+                    data-value={option.value}
+                        data-label={option.label} data-name="Icons__c">
+
+                        <div class="icon-wrapper">
+                            <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                                class="picklist-icon"></lightning-icon>
+                        </div>
+
+                        <span class="picklist-label">{option.label}</span>
+
+                        <template if:true={option.isSelected}>
+                            <lightning-icon icon-name="utility:check" size="x-small"
+                                class="selected-icon"></lightning-icon>
+                        </template>
                     </div>
-    
-                    <span class="picklist-label">{option.label}</span>
-    
-                    <template if:true={option.isSelected}>
-                        <lightning-icon icon-name="utility:check" size="x-small"
-                            class="selected-icon"></lightning-icon>
-                    </template>
-                </div>
-            </template>
-        </div><br/>
-        <template if:true={selectedConfiguration.length}>
-            <div class="selected-container">
-                <p class="selected-value"><span class="emoji-icon">🏡</span> Selected Configuration: {selectedConfiguration} </p>
-                </div>
-
+                </template>
+            </div><br /><br /><br /><br /><br /><br />
         </template>
-    </template>
+
+
+        <template if:true={showSecondPage}>
+            <h2 class="section-label">
+                <lightning-icon icon-name="utility:settings" size="small" class="section-label-icon"></lightning-icon>
+                Configuration Type
+            </h2>
+            <div class="picklist-container">
+                <template for:each={configTypes} for:item="option">
+                    <div key={option.value} class={option.itemClass} onclick={handleSelection}
+                        data-value={option.value} data-label={option.label} data-name="Configuration__c">
+
+                        <div class="icon-wrapper">
+                            <lightning-icon icon-name={option.icon} size="large" alternative-text={option.label}
+                                class="picklist-icon">
+                            </lightning-icon>
+                        </div>
+
+                        <span class="picklist-label">{option.label}</span>
+
+                        <template if:true={option.isSelected}>
+                            <lightning-icon icon-name="utility:check" size="x-small"
+                                class="selected-icon"></lightning-icon>
+                        </template>
+                    </div>
+                </template>
+            </div><br />
+        </template>
 
 
 
-    <div class="carousel-nav">
-        <!-- Previous Button -->
-        <button class="carousel-btn btn-prev" onclick={handlePrevious}>
-            <i class="fas fa-chevron-left" ></i>
-        </button>
-    
-        <!-- Next Button -->
-        <button class="carousel-btn btn-next" onclick={handlenext}>
-            <i class="fas fa-chevron-right" ></i>
-        </button>
-    </div>
-    
+        <div class="dynamic-footer">
+            <button class="footer-btn footer-prev" data-action="prev" onclick={handleNavigation}>Previous</button>
+            <button class="footer-btn footer-next" data-action="next" onclick={handleNavigation}>Next</button>
+        </div>
 
 
-       
-        
 
-        
-        
-    </lightning-card>    
+
+
+
+
+
+
+    </lightning-card>
 </template>
